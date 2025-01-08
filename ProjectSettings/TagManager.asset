@@ -44,3 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Gameplay
+    uniqueID: 1761755457
+    locked: 0
+  - name: Boundries
+    uniqueID: 2673011365
+    locked: 0

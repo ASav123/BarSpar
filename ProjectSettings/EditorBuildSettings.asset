@@ -5,7 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6594419622565dc44af74dc3756c11f6
+  - enabled: 1
+    path: Assets/Scenes/Bar.unity
+    guid: 6d83eccb11f99a747a18f09b3ee8c759
+  - enabled: 1
+    path: Assets/Scenes/Outside.unity
+    guid: 359f5416e8127ff4592119b6e5cdc09a
+  - enabled: 1
+    path: Assets/Scenes/Bottle Gambling Game.unity
+    guid: 15d1832005ee31f41801cd87779c69c2
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: ac7cf110e79ee0c4295022d82bb4ecf5
+  - enabled: 1
+    path: Assets/Scenes/Loose.unity
+    guid: 45d2454be4c4a264ebf229d67cb453a5
   m_configObjects: {}
