@@ -28,4 +28,10 @@ public class Scenes : MonoBehaviour
     {
         SceneManager.LoadScene("Win");
     }
+
+    // Runs when minigame button is pressed
+    public void MiniGame()
+    {
+        SceneManager.LoadScene("Bottle Gambling Game");
+    }
 }
