@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Loose.unity
     guid: 45d2454be4c4a264ebf229d67cb453a5
+  - enabled: 1
+    path: Assets/Scenes/fishing game.unity
+    guid: 1274092c66cb2cb4c8b7c67221b5dbb0
   m_configObjects: {}
