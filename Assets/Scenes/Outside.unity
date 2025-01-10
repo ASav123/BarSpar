@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 411282793}
   - component: {fileID: 411282797}
   - component: {fileID: 411282798}
+  - component: {fileID: 411282799}
   m_Layer: 0
   m_Name: Dave
   m_TagString: Player
@@ -762,6 +763,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d05d9ef20e0d7a4194a347db0b50cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &411282799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411282792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79c2bc26e36abe489ec696717c49b30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heartsText: {fileID: 1809335303}
 --- !u!1 &420704631
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,7 +4001,7 @@ GameObject:
   - component: {fileID: 1850040553}
   m_Layer: 0
   m_Name: Ghost
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4133,12 +4147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad4ecea006ce4f41bc320b8c910450e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterReferance:
+  _monsterReferance:
   - {fileID: 1850040547}
-  topPos: {fileID: 1490818136}
-  bottomPos: {fileID: 654190725}
-  backPos: {fileID: 1520510765}
-  player: {fileID: 0}
+  _topPos: {fileID: 1490818136}
+  _bottomPos: {fileID: 654190725}
+  _backPos: {fileID: 1520510765}
+  Player: {fileID: 0}
 --- !u!114 &1850040553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4151,9 +4165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98c57fff77216a46b34d5c92d22305a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedX: 0
-  speedY: 0
-  speed: 2
 --- !u!1 &1875842955
 GameObject:
   m_ObjectHideFlags: 0

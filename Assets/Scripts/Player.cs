@@ -38,5 +38,11 @@ public class Player : Character
         {
             _scenes.PlayGame();
         }
+
+        if (collision.gameObject.CompareTag("Ghost"))
+        {
+            ChangeHealth(-1);
+
+        }
     }
 }

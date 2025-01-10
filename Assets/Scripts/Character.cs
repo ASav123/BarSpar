@@ -35,8 +35,12 @@ public class Character : MonoBehaviour
         {
             this._health = this._maxHealth;
         }
-        else if ((changeBy + this._health) < 0) {
+        else if ((changeBy + this._health) < 0)
+        {
             this._health = 0;
+        }
+        else {
+            this._health += changeBy;
         }
     }
 

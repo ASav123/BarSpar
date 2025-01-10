@@ -8,18 +8,17 @@ public class Spawner : MonoBehaviour
 {
     //Ghost prefab
     [SerializeField]
-    private GameObject[] monsterReferance;
-    private GameObject spawnedMonster;
+    private GameObject[] _monsterReferance;
+    private GameObject _spawnedMonster;
 
     // Spawn positions
     [SerializeField]
-    private Transform topPos, bottomPos, backPos;
+    private Transform _topPos, _bottomPos, _backPos;
 
-    private int randomIndex;
-    private int randomSide;
+    private int _randomSide;
 
 
-    public Transform player;
+    public Transform Player;
 
     private int _delay = 5;
 
@@ -38,23 +37,23 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
 
-            randomSide = Random.Range(0, 3);
+            this._randomSide = Random.Range(0, 3);
 
-            spawnedMonster = Instantiate(monsterReferance[0]);
+            this._spawnedMonster = Instantiate(this._monsterReferance[0]);
 
-            if (randomSide == 0)
+            if (this._randomSide == 0)
             {
-                spawnedMonster.transform.position = topPos.position;
+                this._spawnedMonster.transform.position = this._topPos.position;
             }
 
-            else if (randomSide == 1)
+            else if (this._randomSide == 1)
             {
-                spawnedMonster.transform.position = bottomPos.position;
+                this._spawnedMonster.transform.position = this._bottomPos.position;
 
             }
-            else if (randomSide == 2)
+            else if (this._randomSide == 2)
             {
-                spawnedMonster.transform.position = backPos.position;
+                this._spawnedMonster.transform.position = this._backPos.position;
 
             }
 

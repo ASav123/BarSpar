@@ -2,34 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ghost : MonoBehaviour
+public class Ghost : Character
 {
     //Speed varibles
     [HideInInspector]
-    public float speedX;
-    public float speedY;
-    private Rigidbody2D myBody;
-    private Transform player;
-    public float speed = 2f;
+    private Rigidbody2D _myBody;
+    private Transform _player;
+    private float _speed = 2f;
 
     void Awake()
     {
-        myBody = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        this._myBody = GetComponent<Rigidbody2D>();
+        this._player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     //Ghost movement
     void Update()
     {
-        if (player != null)
+        if (this._player != null)
         {
-            Vector2 direction = (player.position - transform.position).normalized;
+            Vector2 direction = (this._player.position - transform.position).normalized;
 
-            myBody.velocity = direction * speed;
+            this._myBody.velocity = direction * this._speed;
         }
         else
         {
-            myBody.velocity = Vector2.zero;
+            this._myBody.velocity = Vector2.zero;
         }
     }
 
