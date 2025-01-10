@@ -7,13 +7,11 @@ class Safe
 {
     public bool IsSafe;
     public bool IsConsumed;
-    public bool IsRevealed;
 
-    public Safe(bool isSafe = true, bool isConsumed = false, bool isRevealed = false)
+    public Safe(bool isSafe = true, bool isConsumed = false)
     {
         this.IsSafe = isSafe;
         this.IsConsumed = isConsumed;
-        this.IsRevealed = isRevealed;
     }
 
 
@@ -26,10 +24,12 @@ class Safe
 class Fruit : Safe
 {
     private string _name;
+    private bool _isRevealed
 
-    public Fruit(bool isSafe, bool isConsumed, bool isRevealed) : base(isSafe, isConsumed, isRevealed) // Wine is safe
+    public Fruit(bool isSafe, bool isConsumed) : base(isSafe, isConsumed) // Wine is safe
     {
         this._name = "Fruit";
+        this._isRevealed = false;
     }
 
     public string GetFruitName()
@@ -68,7 +68,7 @@ class Beer : Safe
 {
     private string _name;
 
-    public Beer(bool isSafe, bool isConsumed, bool isRevealed) : base(isSafe, isConsumed, isRevealed) // Beer is safe
+    public Beer(bool isSafe, bool isConsumed) : base(isSafe, isConsumed) // Beer is safe
     {
         _name = "Beer";
     }
@@ -93,15 +93,6 @@ class Beer : Safe
         this.IsConsumed = isConsumed;
     }
 
-    public bool GetBeerIsRevealed()
-    {
-        return this.IsRevealed;
-    }
-
-    public void SetBeerIsRevealed(bool isRevealed)
-    {
-        this.IsRevealed = isRevealed;
-    }
 }
 
 // Derived class for Elixir
@@ -109,7 +100,7 @@ class Elixir : Safe
 {
     private string _name;
 
-    public Elixir(bool isSafe, bool isConsumed, bool isRevealed) : base(isSafe, isConsumed, isRevealed) // Elixir is safe
+    public Elixir(bool isSafe, bool isConsumed) : base(isSafe, isConsumed) // Elixir is safe
     {
         _name = "Elixir";
     }
@@ -134,23 +125,13 @@ class Elixir : Safe
         this.IsConsumed = isConsumed;
     }
 
-    public bool GetElixirIsRevealed()
-    {
-        return this.IsRevealed;
-    }
-
-    public void SetElixirIsRevealed(bool isRevealed)
-    {
-        this.IsRevealed = isRevealed;
-    }
-
 }
 
 class Poison : Safe
 {
     private string _name;
 
-    public Poison(bool isSafe, bool isConsumed, bool isRevealed) : base(isSafe, isConsumed, isRevealed)  // Poison is not safe
+    public Poison(bool isSafe, bool isConsumed) : base(isSafe, isConsumed)  // Poison is not safe
     {
         _name = "Poison";
         IsSafe = false;  // Poison is unsafe
@@ -176,14 +157,5 @@ class Poison : Safe
         this.IsConsumed = isConsumed;
     }
 
-    public bool GetPoisonIsRevealed()
-    {
-        return this.IsRevealed;
-    }
-
-    public void SetPoisonIsRevealed(bool isRevealed)
-    {
-        this.IsRevealed = isRevealed;
-    }
 }
 
