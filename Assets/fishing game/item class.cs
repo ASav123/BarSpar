@@ -11,8 +11,8 @@ public abstract class ItemClass
     public abstract ItemClass GetItem();
 
     public abstract FishClass Getfish();
-    public abstract MiscClass GetMisc();
-    public abstract ConsumableClass GetConsumable();
+    //public abstract MiscClass GetMisc();
+    //public abstract ConsumableClass GetConsumable();
 
 
 

@@ -6,7 +6,7 @@ public abstract class FishClass : ItemClass
 {
     public override ItemClass GetItem() { return this; }
 
-    public override FishClass GetFish() { return this; }
-    public override FishClass GetMisc() { return null; }
-    public override FishClass GetConsumable() { return null; }
+    //public override FishClass GetFish() { return this; }
+    //public override FishClass GetMisc() { return null; }
+    //public override FishClass GetConsumable() { return null; }
 }
