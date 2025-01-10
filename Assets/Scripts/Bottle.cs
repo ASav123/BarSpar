@@ -24,7 +24,7 @@ class Safe
 class Fruit : Safe
 {
     private string _name;
-    private bool _isRevealed
+    private bool _isRevealed;
 
     public Fruit(bool isSafe, bool isConsumed) : base(isSafe, isConsumed) // Wine is safe
     {
@@ -54,12 +54,12 @@ class Fruit : Safe
 
     public bool GetFruitIsRevealed()
     {
-        return this.IsRevealed;
+        return this._isRevealed;
     }
 
     public void SetFruitIsRevealed(bool isRevealed)
     {
-        this.IsRevealed = isRevealed;
+        this._isRevealed = isRevealed;
     }
 }
 
