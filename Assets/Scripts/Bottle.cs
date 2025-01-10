@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Base class that tells us if a bottle is safe to drink (a property of the bottle). Can be inherited by most bottles (the safe ones)
-class Safe
+public class Safe
 {
     public bool IsSafe;
     public bool IsConsumed;
@@ -14,10 +14,24 @@ class Safe
         this.IsConsumed = isConsumed;
     }
 
-
     public virtual void OnDrink()
     {
         Debug.Log("You drank from a bottle. Nothing special happened.");
+    }
+
+    public bool GetIsSafe()
+    {
+        return this.IsSafe;
+    }
+
+    public bool GetIsConsumed()
+    {
+        return this.IsConsumed;
+    }
+
+    public void SetIsConsumed(bool isConsumed)
+    {
+        this.IsConsumed = isConsumed;
     }
 }
 
@@ -26,7 +40,7 @@ class Fruit : Safe
     private string _name;
     private bool _isRevealed;
 
-    public Fruit(bool isSafe, bool isConsumed) : base(isSafe, isConsumed) 
+    public Fruit(bool isSafe, bool isConsumed) : base(isSafe, isConsumed)
     {
         this._name = "Fruit";
         this._isRevealed = false;
@@ -67,10 +81,12 @@ class Fruit : Safe
 class Beer : Safe
 {
     private string _name;
+    private Fruit _fruit; // Aggregating a single fruit object inside Beer
 
-    public Beer(bool isSafe, bool isConsumed) : base(isSafe, isConsumed) // Beer is safe
+    public Beer(bool isSafe, bool isConsumed, Fruit fruit) : base(isSafe, isConsumed)
     {
         _name = "Beer";
+        _fruit = fruit;  // Aggregating Fruit object inside Beer
     }
 
     public string GetBeerName()
@@ -93,6 +109,15 @@ class Beer : Safe
         this.IsConsumed = isConsumed;
     }
 
+    // Checking if fruit is consumed, if yes, then beer is consumed
+    public void CheckAndConsumeBeer()
+    {
+        if (_fruit.GetFruitIsConsumed()) // If the fruit is consumed
+        {
+            SetBeerIsConsumed(true);
+            Debug.Log("The fruit was consumed, now the beer is consumed!");
+        }
+    }
 }
 
 // Derived class for Elixir
@@ -124,7 +149,6 @@ class Elixir : Safe
     {
         this.IsConsumed = isConsumed;
     }
-
 }
 
 class Poison : Safe
@@ -156,6 +180,4 @@ class Poison : Safe
     {
         this.IsConsumed = isConsumed;
     }
-
 }
-
