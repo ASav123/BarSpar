@@ -8,6 +8,7 @@ public class Player : Character
     // Unique attributes of class
     private Character _character;
     private Scenes _scenes;
+    private Coins _coins;
 
     private float _moveSpeed = 5f;
     
@@ -17,7 +18,9 @@ public class Player : Character
     {
         _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
+        _coins = GetComponent<Coins>();
         _character.CharacterCreate("Dave", 5, 3);
+        _coins.CoinsCreate(0);
     }
 
     void Update()
@@ -41,20 +44,19 @@ public class Player : Character
 
         if (collision.gameObject.CompareTag("Ghost"))
         {
-            ChangeHealth(-1);
+            this.ChangeHealth(-1);
 
         }
 
         if (collision.gameObject.CompareTag("Heart"))
         {
-            ChangeHealth(5);
+            this.ChangeHealth(5);
 
         }
 
         if (collision.gameObject.CompareTag("Coin"))
         {
-            // Add code that inceses coins
-
+            this._coins.ChangeCoins(5);
         }
     }
 }
