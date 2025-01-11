@@ -10,11 +10,14 @@ public class Lives : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _heartsText;
 
     private Player _player;
+    private Scenes _scenes;
 
 
     void Start()
     {
         _player = GetComponent<Player>();
+        _scenes = GetComponent<Scenes>();
+
 
     }
 
@@ -22,5 +25,9 @@ public class Lives : MonoBehaviour
     {
         //Updates health textboxes
         this._heartsText.text = string.Format($"{this._player.GetHealth()}");
+
+        if (this._player.GetHealth() <= 0) {
+            this._scenes.PlayerDeath();
+        }
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bar
   - Ghost
+  - Coin
+  - Heart
   layers:
   - Default
   - TransparentFX

@@ -13,11 +13,11 @@ public class Player : Character
     
 
 
-    void Start()
+    void Awake()
     {
         _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
-        _character.CharacterCreate("Dave", 100, 3);
+        _character.CharacterCreate("Dave", 5, 3);
     }
 
     void Update()
@@ -36,12 +36,24 @@ public class Player : Character
     {
         if (collision.gameObject.CompareTag("Bar"))
         {
-            _scenes.PlayGame();
+            this._scenes.PlayGame();
         }
 
         if (collision.gameObject.CompareTag("Ghost"))
         {
             ChangeHealth(-1);
+
+        }
+
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+            ChangeHealth(5);
+
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            // Add code that inceses coins
 
         }
     }
