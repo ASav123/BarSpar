@@ -15,8 +15,7 @@ public class BottleManager : MonoBehaviour
     void Start()
     {
         Debug.Log("Start method called");
-
-        SpawnBottles();  // This will call SpawnBottles when the game starts
+        SpawnBottles(); // This will call SpawnBottles when the game starts
     }
 
     private void GenerateBottleList()
@@ -40,48 +39,52 @@ public class BottleManager : MonoBehaviour
         }
     }
 
-    public void SpawnBottles()
+    public void SpawnBottles() 
     {
         GenerateBottleList();
 
+        // Adjust the spawn position offset
+        float xOffset = -5f; // Moves bottles more to the left
+
         for (int i = 0; i < bottles.Count; i++)
         {
-            GameObject bottlePrefab = Instantiate(questionMarkPrefab, new Vector3(i * 2, 0, 0), Quaternion.identity);
+            Vector3 spawnPosition = new Vector3(i * 2 + xOffset, 0, 0);
+            GameObject bottlePrefab = Instantiate(questionMarkPrefab, spawnPosition, Quaternion.identity);
 
+            // Initialize the bottle with the BottleClick script
             bottlePrefab.GetComponent<BottleClick>().Initialize(bottles[i], this);
 
-            if (bottles[i] is Fruit)
-                bottlePrefab.GetComponent<SpriteRenderer>().sprite = fruitPrefab.GetComponent<SpriteRenderer>().sprite;
-            else if (bottles[i] is Beer)
-                bottlePrefab.GetComponent<SpriteRenderer>().sprite = beerPrefab.GetComponent<SpriteRenderer>().sprite;
-            else if (bottles[i] is Elixir)
-                bottlePrefab.GetComponent<SpriteRenderer>().sprite = elixirPrefab.GetComponent<SpriteRenderer>().sprite;
-            else if (bottles[i] is Poison)
-                bottlePrefab.GetComponent<SpriteRenderer>().sprite = poisonPrefab.GetComponent<SpriteRenderer>().sprite;
+            // The sprite remains as the question mark until revealed
         }
-
     }
 
     internal void RevealBottle(GameObject bottleObject, Safe bottle)
     {
+        // Access the SpriteRenderer of the clicked bottle
+        SpriteRenderer spriteRenderer = bottleObject.GetComponent<SpriteRenderer>();
+
         if (bottle is Fruit && !((Fruit)bottle).GetFruitIsConsumed())
         {
             ((Fruit)bottle).SetFruitIsConsumed(true);
+            spriteRenderer.sprite = fruitPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Fruit has been consumed.");
         }
         else if (bottle is Beer && !((Beer)bottle).GetBeerIsConsumed())
         {
             ((Beer)bottle).SetBeerIsConsumed(true);
+            spriteRenderer.sprite = beerPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Beer has been consumed.");
         }
         else if (bottle is Elixir && !((Elixir)bottle).GetElixirIsConsumed())
         {
             ((Elixir)bottle).SetElixirIsConsumed(true);
+            spriteRenderer.sprite = elixirPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Elixir has been consumed.");
         }
         else if (bottle is Poison && !((Poison)bottle).GetPoisonIsConsumed())
         {
             ((Poison)bottle).SetPoisonIsConsumed(true);
+            spriteRenderer.sprite = poisonPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Poison has been consumed.");
         }
     }
