@@ -19,8 +19,11 @@ public class Player : Character
         _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
         _coins = GetComponent<Coins>();
-        _character.CharacterCreate("Dave", 5, 3);
-        _coins.CoinsCreate(0);
+        //_character.CharacterCreate("Dave", 5, 3);
+        //_coins.CoinsCreate(0);
+    }
+    public void PlayerCreate(string name, int health, int damage) {
+        _character.CharacterCreate(name, health, damage);
     }
 
     void Update()

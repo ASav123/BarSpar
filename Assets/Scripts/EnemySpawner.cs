@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
 
     public Transform Player;
 
-    private int _delay = 5;
+    private int _delay = 3;
 
 
     // Start is called before the first frame update
@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(this._delay);
 
             this._randomSide = Random.Range(0, 3);
 
