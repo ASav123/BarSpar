@@ -9,8 +9,9 @@ public class Player : Character
     private Character _character;
     private Scenes _scenes;
     private Coins _coins;
+    private DifficultySelection _difficultySelection;
 
-    private float _moveSpeed = 5f;
+    private float _moveSpeed;
     
 
 
@@ -19,11 +20,13 @@ public class Player : Character
         _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
         _coins = GetComponent<Coins>();
-        //_character.CharacterCreate("Dave", 5, 3);
-        //_coins.CoinsCreate(0);
+        _difficultySelection = GetComponent<DifficultySelection>();
+        PlayerCreate("Dave", 5, 3, 5f);
+        _coins.CoinsCreate(0);
     }
-    public void PlayerCreate(string name, int health, int damage) {
+    public void PlayerCreate(string name, int health, int damage, float moveSpeed) {
         _character.CharacterCreate(name, health, damage);
+        this._moveSpeed = moveSpeed;
     }
 
     void Update()
