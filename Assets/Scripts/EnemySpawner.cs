@@ -22,15 +22,13 @@ public class Spawner : MonoBehaviour
 
     private int _delay = 3;
 
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        // Starts spawing
         StartCoroutine(SpawnMonsters());
 
     }
-
+    // Picks a random spawn location and spawns a ghost
     IEnumerator SpawnMonsters()
     {
         while (true)

@@ -16,8 +16,6 @@ public class DifficultySelection : MonoBehaviour
     {
         _coins = GetComponent<Coins>();
         _player = GetComponent<Player>();
-        _player.CharacterCreate("Dave", 5, 3);
-        //_coins.CoinsCreate(0);
     }
 
     public void Hard() {

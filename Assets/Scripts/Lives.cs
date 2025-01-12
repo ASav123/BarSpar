@@ -6,8 +6,9 @@ using UnityEngine.TextCore.Text;
 
 public class Lives : MonoBehaviour
 {
-    //Connects script to textbox boject
+    // Connects script to textbox boject
     [SerializeField] private TextMeshProUGUI _heartsText;
+
 
     private Player _player;
     private Scenes _scenes;
@@ -15,6 +16,7 @@ public class Lives : MonoBehaviour
 
     void Start()
     {
+        // Gets each of the scripts
         _player = GetComponent<Player>();
         _scenes = GetComponent<Scenes>();
 
@@ -26,6 +28,7 @@ public class Lives : MonoBehaviour
         //Updates health textboxes
         this._heartsText.text = string.Format($"{this._player.GetHealth()}");
 
+        // Game ends if health is 0
         if (this._player.GetHealth() <= 0) {
             this._scenes.PlayerDeath();
         }

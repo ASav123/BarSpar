@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    // Unique attributes of class
+    // Unique attributes of player class
     private Character _character;
     private Scenes _scenes;
     private Coins _coins;
@@ -17,13 +17,17 @@ public class Player : Character
 
     void Awake()
     {
+        // Getts each of the sripts
         _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
         _coins = GetComponent<Coins>();
         _difficultySelection = GetComponent<DifficultySelection>();
+
+        // Constructors 
         PlayerCreate("Dave", 5, 3, 5f);
         _coins.CoinsCreate(0);
     }
+    // Player constructor using base class of character
     public void PlayerCreate(string name, int health, int damage, float moveSpeed) {
         _character.CharacterCreate(name, health, damage);
         this._moveSpeed = moveSpeed;
@@ -41,6 +45,7 @@ public class Player : Character
 
     }
 
+    // Collison detection with outside area
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bar"))
