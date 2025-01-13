@@ -29,6 +29,10 @@ public class Coins : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        CoinsCreate(GameData.Instance.PlayerCoins);
+    }
 
     void Update()
     {

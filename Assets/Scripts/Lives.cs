@@ -9,7 +9,7 @@ public class Lives : MonoBehaviour
     // Connects script to textbox boject
     [SerializeField] private TextMeshProUGUI _heartsText;
 
-
+    // Scripts
     private Player _player;
     private Scenes _scenes;
 
@@ -19,8 +19,6 @@ public class Lives : MonoBehaviour
         // Gets each of the scripts
         _player = GetComponent<Player>();
         _scenes = GetComponent<Scenes>();
-
-
     }
 
     void Update()

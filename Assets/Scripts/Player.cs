@@ -11,11 +11,11 @@ public class Player : Character
     private Coins _coins;
     private DifficultySelection _difficultySelection;
 
-    private float _moveSpeed;
+    private int _moveSpeed;
     
 
 
-    void Awake()
+    void Start()
     {
         // Getts each of the sripts
         _character = GetComponent<Character>();
@@ -24,11 +24,11 @@ public class Player : Character
         _difficultySelection = GetComponent<DifficultySelection>();
 
         // Constructors 
-        PlayerCreate("Dave", 5, 3, 5f);
-        _coins.CoinsCreate(0);
+        PlayerCreate(GameData.Instance.PlayerName, GameData.Instance.PlayerHealth, 3, GameData.Instance.PlayerSpeed);
+        _coins.CoinsCreate(GameData.Instance.PlayerCoins);
     }
     // Player constructor using base class of character
-    public void PlayerCreate(string name, int health, int damage, float moveSpeed) {
+    public void PlayerCreate(string name, int health, int damage, int moveSpeed) {
         _character.CharacterCreate(name, health, damage);
         this._moveSpeed = moveSpeed;
     }
@@ -55,19 +55,25 @@ public class Player : Character
 
         if (collision.gameObject.CompareTag("Ghost"))
         {
-            this.ChangeHealth(-1);
+            this.ChangeHealth(-GameData.Instance.EnemyDamage);
+            GameData.Instance.PlayerHealth = this.GetHealth();
+
 
         }
 
         if (collision.gameObject.CompareTag("Heart"))
         {
             this.ChangeHealth(5);
+            GameData.Instance.PlayerHealth = this.GetHealth();
+
 
         }
 
         if (collision.gameObject.CompareTag("Coin"))
         {
             this._coins.ChangeCoins(5);
+            GameData.Instance.PlayerCoins = this._coins.GetCoins();
+
         }
     }
 }

@@ -15,11 +15,9 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Transform _topPos, _bottomPos, _backPos;
 
+    // Spawner attributes
     private int _randomSide;
-
-
     public Transform Player;
-
     private int _delay = 3;
 
     void Awake()
