@@ -24,12 +24,12 @@ public class Player : Character
         _difficultySelection = GetComponent<DifficultySelection>();
 
         // Constructors 
-        PlayerCreate(GameData.Instance.PlayerName, GameData.Instance.PlayerHealth, 3, GameData.Instance.PlayerSpeed);
+        PlayerCreate(GameData.Instance.PlayerName, GameData.Instance.PlayerHealth, GameData.Instance.PlayerMaxHealth ,3 , GameData.Instance.PlayerSpeed);
         _coins.CoinsCreate(GameData.Instance.PlayerCoins);
     }
     // Player constructor using base class of character
-    public void PlayerCreate(string name, int health, int damage, int moveSpeed) {
-        _character.CharacterCreate(name, health, damage);
+    public void PlayerCreate(string name, int health, int maxHealth, int damage, int moveSpeed) {
+        _character.CharacterCreate(name, health, maxHealth, damage);
         this._moveSpeed = moveSpeed;
     }
 

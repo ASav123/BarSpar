@@ -41,6 +41,7 @@ public class GameData : MonoBehaviour
     // Changes game settings based on chosen difficulty
     public void DifficultySettings(int health, int speed, int ememyDamage) {
         this.PlayerHealth = health;
+        this.PlayerMaxHealth = health;
         this.PlayerSpeed = speed;
         this.EnemyDamage = ememyDamage;
     }

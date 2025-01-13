@@ -11,9 +11,9 @@ public class Character : MonoBehaviour
     private int _damage;
     
     //Base constrctor 
-    public void CharacterCreate(string name, int maxHealth, int damage) {
+    public void CharacterCreate(string name, int health, int maxHealth, int damage) {
         this._name = name;
-        this._health = maxHealth;
+        this._health = health;
         this._maxHealth = maxHealth;
         this._damage = damage; 
     }
