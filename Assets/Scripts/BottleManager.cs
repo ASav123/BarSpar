@@ -39,7 +39,7 @@ public class BottleManager : MonoBehaviour
         }
     }
 
-    public void SpawnBottles() 
+    public void SpawnBottles()
     {
         GenerateBottleList();
 
@@ -54,9 +54,17 @@ public class BottleManager : MonoBehaviour
             // Initialize the bottle with the BottleClick script
             bottlePrefab.GetComponent<BottleClick>().Initialize(bottles[i], this);
 
+            // Set the BoxCollider2D size to (1, 5)
+            BoxCollider2D boxCollider = bottlePrefab.GetComponent<BoxCollider2D>();
+            if (boxCollider != null)
+            {
+                boxCollider.size = new Vector2(1, 5); // Set the collider size to (1, 5)
+            }
+
             // The sprite remains as the question mark until revealed
         }
     }
+
 
     internal void RevealBottle(GameObject bottleObject, Safe bottle)
     {
