@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/fishing game.unity
     guid: 1274092c66cb2cb4c8b7c67221b5dbb0
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: 53f3ea302b9d51a488cfa60d84896e55
   m_configObjects: {}

@@ -35,6 +35,12 @@ public class Scenes : MonoBehaviour
         SceneManager.LoadScene("Bottle Gambling Game");
     }
 
+    // Runs when shop button is pressed
+    public void Shop()
+    {
+        SceneManager.LoadScene("Shop");
+    }
+
     // Runs when player presses outside button
     public void Outside()
     {
