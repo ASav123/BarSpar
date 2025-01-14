@@ -35,7 +35,7 @@ public class Safe
     }
 }
 
-class Fruit : Safe
+public class Fruit : Safe
 {
     private string _name;
     private bool _isRevealed;
@@ -78,7 +78,7 @@ class Fruit : Safe
 }
 
 // Derived class for Beer
-class Beer : Safe
+public class Beer : Safe
 {
     private string _name;
     private Fruit _fruit; // Aggregating a single fruit object inside Beer
