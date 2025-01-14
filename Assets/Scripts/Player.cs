@@ -12,6 +12,7 @@ public class Player : Character
     private DifficultySelection _difficultySelection;
 
     private int _moveSpeed;
+    private string[] _playerPocket;
     
 
 
@@ -23,14 +24,9 @@ public class Player : Character
         _coins = GetComponent<Coins>();
         _difficultySelection = GetComponent<DifficultySelection>();
 
-        // Constructors 
-        PlayerCreate(GameData.Instance.PlayerName, GameData.Instance.PlayerHealth, GameData.Instance.PlayerMaxHealth ,3 , GameData.Instance.PlayerSpeed);
-        _coins.CoinsCreate(GameData.Instance.PlayerCoins);
-    }
-    // Player constructor using base class of character
-    public void PlayerCreate(string name, int health, int maxHealth, int damage, int moveSpeed) {
-        _character.CharacterCreate(name, health, maxHealth, damage);
-        this._moveSpeed = moveSpeed;
+        // Player created
+        PlayerCreate(GameData.Instance.PlayerName, GameData.Instance.PlayerHealth, GameData.Instance.PlayerMaxHealth ,3 , GameData.Instance.PlayerSpeed, GameData.Instance.PlayerCoins);
+
     }
 
     void Update()
@@ -43,6 +39,16 @@ public class Player : Character
         Vector2 moveDirection = new Vector2(moveX, moveY).normalized;
         transform.Translate(moveDirection * this._moveSpeed * Time.deltaTime);
 
+    }
+
+    // Player constructor using base class of character
+    public void PlayerCreate(string name, int health, int maxHealth, int damage, int moveSpeed, int coins)
+    {
+        _character.CharacterCreate(name, health, maxHealth, damage);
+        this._moveSpeed = moveSpeed;
+
+        // Coins created though composition (strong)
+        _coins.CoinsCreate(coins);
     }
 
     // Collison detection with outside area
@@ -73,6 +79,18 @@ public class Player : Character
         {
             this._coins.ChangeCoins(5);
             GameData.Instance.PlayerCoins = this._coins.GetCoins();
+
+        }
+
+        if (collision.gameObject.CompareTag("Flower"))
+        {
+
+
+        }
+
+        if (collision.gameObject.CompareTag("Key"))
+        {
+
 
         }
     }

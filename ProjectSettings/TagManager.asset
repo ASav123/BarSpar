@@ -8,6 +8,8 @@ TagManager:
   - Ghost
   - Coin
   - Heart
+  - Flower
+  - Key
   layers:
   - Default
   - TransparentFX

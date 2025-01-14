@@ -11,6 +11,17 @@ public class Coins : MonoBehaviour
     //Coin attributes
     private int _coins;
 
+    void Start()
+    {
+        this._coins = GameData.Instance.PlayerCoins;
+    }
+
+    void Update()
+    {
+        //Updates coin textbox
+        this._coinsText.text = string.Format($"Coins: {this.GetCoins()}");
+    }
+
     //Coin constructor
     public void CoinsCreate(int coins)
     {
@@ -29,14 +40,5 @@ public class Coins : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        CoinsCreate(GameData.Instance.PlayerCoins);
-    }
-
-    void Update()
-    {
-        //Updates coin textbox
-        this._coinsText.text = string.Format($"Coins: {this.GetCoins()}");
-    }
+   
 }

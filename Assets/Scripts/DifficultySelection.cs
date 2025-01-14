@@ -23,7 +23,6 @@ public class DifficultySelection : MonoBehaviour
 
     // Hard settings
     public void Hard() {
-        Debug.Log("Hard button");
         this._playerHealth = 50;
         this._playerSpeed = 3;
         this._enemyDamage = 2;
@@ -32,7 +31,6 @@ public class DifficultySelection : MonoBehaviour
 
     // Normal settings
     public void Normal() {
-        Debug.Log("Normal Button");
         this._playerHealth = 100;
         this._playerSpeed = 5;
         this._enemyDamage = 1;
