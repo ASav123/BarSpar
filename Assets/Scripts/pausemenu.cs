@@ -18,6 +18,6 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
-        // dont know how to make it restart
+        Time.timeScale = 1;
     }
 }

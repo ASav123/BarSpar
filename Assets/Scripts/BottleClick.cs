@@ -15,16 +15,15 @@ public class BottleClick : MonoBehaviour
     // When the bottle is clicked
     private void OnMouseDown()
     {
-        bottleManager.RevealBottle(gameObject, bottle);
-        HandleBottleConsumption();
+        bottleManager.RevealBottle(gameObject, bottle); // Reveal the clicked bottle
+        HandleBottleConsumption(); // Handle its consumption
     }
 
-    // This method will use getters and setters to access and update the state of the bottle
     private void HandleBottleConsumption()
     {
         if (bottle is Fruit)
         {
-            // Using the getter and setter for the fruit bottle
+            // Using getter and setter for the fruit bottle
             if (!((Fruit)bottle).GetFruitIsConsumed())
             {
                 ((Fruit)bottle).SetFruitIsConsumed(true);
@@ -33,7 +32,7 @@ public class BottleClick : MonoBehaviour
         }
         else if (bottle is Beer)
         {
-            // Using the getter and setter for the beer bottle
+            // Using getter and setter for the beer bottle
             if (!((Beer)bottle).GetBeerIsConsumed())
             {
                 ((Beer)bottle).SetBeerIsConsumed(true);
@@ -42,7 +41,7 @@ public class BottleClick : MonoBehaviour
         }
         else if (bottle is Elixir)
         {
-            // Using the getter and setter for the elixir bottle
+            // Using getter and setter for the elixir bottle
             if (!((Elixir)bottle).GetElixirIsConsumed())
             {
                 ((Elixir)bottle).SetElixirIsConsumed(true);
@@ -51,7 +50,7 @@ public class BottleClick : MonoBehaviour
         }
         else if (bottle is Poison)
         {
-            // Using the getter and setter for the poison bottle
+            // Using getter and setter for the poison bottle
             if (!((Poison)bottle).GetPoisonIsConsumed())
             {
                 ((Poison)bottle).SetPoisonIsConsumed(true);
