@@ -23,7 +23,6 @@ public class BottleClick : MonoBehaviour
     {
         if (bottle is Fruit)
         {
-            // Using getter and setter for the fruit bottle
             if (!((Fruit)bottle).GetFruitIsConsumed())
             {
                 ((Fruit)bottle).SetFruitIsConsumed(true);
@@ -32,7 +31,6 @@ public class BottleClick : MonoBehaviour
         }
         else if (bottle is Beer)
         {
-            // Using getter and setter for the beer bottle
             if (!((Beer)bottle).GetBeerIsConsumed())
             {
                 ((Beer)bottle).SetBeerIsConsumed(true);
@@ -41,7 +39,6 @@ public class BottleClick : MonoBehaviour
         }
         else if (bottle is Elixir)
         {
-            // Using getter and setter for the elixir bottle
             if (!((Elixir)bottle).GetElixirIsConsumed())
             {
                 ((Elixir)bottle).SetElixirIsConsumed(true);
@@ -50,7 +47,6 @@ public class BottleClick : MonoBehaviour
         }
         else if (bottle is Poison)
         {
-            // Using getter and setter for the poison bottle
             if (!((Poison)bottle).GetPoisonIsConsumed())
             {
                 ((Poison)bottle).SetPoisonIsConsumed(true);
