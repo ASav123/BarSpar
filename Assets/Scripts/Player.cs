@@ -9,10 +9,10 @@ public class Player : Character
     private Character _character;
     private Scenes _scenes;
     private Coins _coins;
+    private Pocket _pocket;
     private DifficultySelection _difficultySelection;
 
     private int _moveSpeed;
-    private string[] _playerPocket;
     
 
 
@@ -23,9 +23,11 @@ public class Player : Character
         _scenes = GetComponent<Scenes>();
         _coins = GetComponent<Coins>();
         _difficultySelection = GetComponent<DifficultySelection>();
+        _pocket = GetComponent<Pocket>();
+
 
         // Player created
-        PlayerCreate(GameData.Instance.PlayerName, GameData.Instance.PlayerHealth, GameData.Instance.PlayerMaxHealth ,3 , GameData.Instance.PlayerSpeed, GameData.Instance.PlayerCoins);
+        PlayerCreate(GameData.Instance.PlayerName , GameData.Instance.PlayerHealth, GameData.Instance.PlayerMaxHealth ,3 , GameData.Instance.PlayerSpeed, GameData.Instance.PlayerCoins);
 
     }
 
@@ -51,6 +53,8 @@ public class Player : Character
         _coins.CoinsCreate(coins);
     }
 
+  
+
     // Collison detection with outside area
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -71,6 +75,7 @@ public class Player : Character
         {
             this.ChangeHealth(5);
             GameData.Instance.PlayerHealth = this.GetHealth();
+            this._pocket.PocketAdd("Heart");
 
 
         }
@@ -79,19 +84,18 @@ public class Player : Character
         {
             this._coins.ChangeCoins(5);
             GameData.Instance.PlayerCoins = this._coins.GetCoins();
+            this._pocket.PocketAdd("Coin");
 
         }
 
         if (collision.gameObject.CompareTag("Flower"))
         {
-
-
+            this._pocket.PocketAdd("Flower");
         }
 
         if (collision.gameObject.CompareTag("Key"))
         {
-
-
+            this._pocket.PocketAdd("Key");
         }
     }
 }
