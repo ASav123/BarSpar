@@ -14,6 +14,8 @@ public class BottleManager : MonoBehaviour
     public GameObject elixirPrefab;
     public GameObject poisonPrefab;
 
+    public BottleRevealManager bottleRevealManager; // New reference
+
     void Start()
     {
         Debug.Log("Start method called");
@@ -71,7 +73,6 @@ public class BottleManager : MonoBehaviour
         }
     }
 
-
     internal void RevealBottle(GameObject bottleObject, Safe bottle)
     {
         // Access the SpriteRenderer of the clicked bottle
@@ -111,6 +112,19 @@ public class BottleManager : MonoBehaviour
         }
     }
 
+    // Additional methods to handle revealing fruit or poison directly
+    public void RevealFruitBottle()
+    {
+        Debug.Log("Revealing a Fruit Bottle.");
+        // You could implement logic here to randomly select a fruit bottle
+    }
+
+    public void RevealPoisonBottle()
+    {
+        Debug.Log("Revealing a Poison Bottle.");
+        // You could implement logic here to randomly select a poison bottle
+    }
+
     // Method to automatically reveal and consume the beer bottle after 3 fruits are consumed
     private void ConsumeBeer()
     {
@@ -124,23 +138,6 @@ public class BottleManager : MonoBehaviour
 
             // Trigger the beer bottle reveal and consumption
             Debug.Log("Beer automatically consumed and revealed after 3 fruits.");
-
-            // Ensure all bottles are still clickable by re-enabling the colliders
-            EnableColliders();
-        }
-    }
-
-    private void EnableColliders()
-    {
-        // Ensure that all bottles still have colliders enabled
-        var bottleClickObjects = FindObjectsOfType<BottleClick>();
-        foreach (var bottleClick in bottleClickObjects)
-        {
-            BoxCollider2D boxCollider = bottleClick.GetComponent<BoxCollider2D>();
-            if (boxCollider != null)
-            {
-                boxCollider.enabled = true; // Enable the collider for the bottle
-            }
         }
     }
 }
