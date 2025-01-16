@@ -101,21 +101,58 @@ public class BottleManager : MonoBehaviour
         else if (bottle is Elixir && !((Elixir)bottle).GetElixirIsConsumed())
         {
             ((Elixir)bottle).SetElixirIsConsumed(true);
-            spriteRenderer.sprite = elixirPrefab.GetComponent<SpriteRenderer>().sprite;
-            GameData.Instance.PlayerHealth -= 20;
-            GameData.Instance.PlayerCoins -= 20;
-            _scenes.PlayerDeath();
+            spriteRenderer.sprite = elixirPrefab.GetComponent<SpriteRenderer>()?.sprite;
+
+            if (GameData.Instance == null)
+            {
+                Debug.LogError("GameData.Instance is null! Cannot update player stats.");
+                return;
+            }
+
+            GameData.Instance.PlayerHealth += 20; // Increase health
+            GameData.Instance.PlayerCoins += 20; // Increase coins
+
+            Debug.Log($"Elixir consumed. Health: {GameData.Instance.PlayerHealth}, Coins: {GameData.Instance.PlayerCoins}");
+
+            // Check if scene transition method is functional
+            if (_scenes == null)
+            {
+                Debug.LogError("_scenes is null! Cannot transition to Win scene.");
+                return;
+            }
+
+            _scenes.PlayerWin();
         }
         else if (bottle is Poison && !((Poison)bottle).GetPoisonIsConsumed())
         {
             ((Poison)bottle).SetPoisonIsConsumed(true);
-            spriteRenderer.sprite = poisonPrefab.GetComponent<SpriteRenderer>().sprite;
-            Debug.Log("Poison has been consumed.");
+            spriteRenderer.sprite = poisonPrefab.GetComponent<SpriteRenderer>()?.sprite;
+
+            if (GameData.Instance == null)
+            {
+                Debug.LogError("GameData.Instance is null! Cannot update player stats.");
+                return;
+            }
+
+            GameData.Instance.PlayerHealth -= 20; // Decrease health
+            GameData.Instance.PlayerCoins -= 20; // Decrease coins
+
+            Debug.Log($"Poison consumed. Health: {GameData.Instance.PlayerHealth}, Coins: {GameData.Instance.PlayerCoins}");
+
+            // Check if scene transition method is functional
+            if (_scenes == null)
+            {
+                Debug.LogError("_scenes is null! Cannot transition to Lose scene.");
+                return;
+            }
+
+            _scenes.PlayerDeath();
         }
+
     }
 
     // Additional methods to handle revealing fruit or poison directly
- 
+
     private void ConsumeBeer()
     {
         if (beerBottle != null && !beerBottle.GetBeerIsConsumed())
