@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BottleManager : MonoBehaviour
 {
+    private Scenes _scenes;
     private List<Safe> bottles = new List<Safe>();
     private int consumedFruits = 0; // Track how many fruits have been consumed
     private Beer beerBottle; // Store the beer bottle reference
@@ -13,8 +14,6 @@ public class BottleManager : MonoBehaviour
     public GameObject beerPrefab;
     public GameObject elixirPrefab;
     public GameObject poisonPrefab;
-
-    public BottleRevealManager bottleRevealManager; // New reference
 
     void Start()
     {
@@ -102,7 +101,9 @@ public class BottleManager : MonoBehaviour
         {
             ((Elixir)bottle).SetElixirIsConsumed(true);
             spriteRenderer.sprite = elixirPrefab.GetComponent<SpriteRenderer>().sprite;
-            Debug.Log("Elixir has been consumed.");
+            GameData.Instance.PlayerHealth -= 20;
+            GameData.Instance.PlayerCoins -= 20;
+            _scenes.PlayerDeath();
         }
         else if (bottle is Poison && !((Poison)bottle).GetPoisonIsConsumed())
         {
@@ -113,19 +114,7 @@ public class BottleManager : MonoBehaviour
     }
 
     // Additional methods to handle revealing fruit or poison directly
-    public void RevealFruitBottle()
-    {
-        Debug.Log("Revealing a Fruit Bottle.");
-        // You could implement logic here to randomly select a fruit bottle
-    }
-
-    public void RevealPoisonBottle()
-    {
-        Debug.Log("Revealing a Poison Bottle.");
-        // You could implement logic here to randomly select a poison bottle
-    }
-
-    // Method to automatically reveal and consume the beer bottle after 3 fruits are consumed
+ 
     private void ConsumeBeer()
     {
         if (beerBottle != null && !beerBottle.GetBeerIsConsumed())
