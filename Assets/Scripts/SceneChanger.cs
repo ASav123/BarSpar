@@ -42,6 +42,12 @@ public class Scenes : MonoBehaviour
         SceneManager.LoadScene("Shop");
     }
 
+    // Runs when leave button is pressed
+    public void Bar()
+    {
+        SceneManager.LoadScene("Bar");
+    }
+
     // Runs when player presses outside button
     public void Outside()
     {
