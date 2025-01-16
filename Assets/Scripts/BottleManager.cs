@@ -17,6 +17,7 @@ public class BottleManager : MonoBehaviour
 
     void Start()
     {
+        _scenes = GetComponent<Scenes>();
         Debug.Log("Start method called");
         SpawnBottles(); // This will call SpawnBottles when the game starts
     }
