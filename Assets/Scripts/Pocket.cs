@@ -36,17 +36,6 @@ public class Pocket : MonoBehaviour
         Debug.Log("");
     }
 
-    public void Main(string[] args)
-    {
-        string[] sortingOrder = new string[] { "coin", "flower", "heart", "key" };
-        string[] pockets = new string[] { "coin", "key", "coin", "heart", "flower", "heart", "heart", "heart", "coin" };
-        InstanceSort(pockets);
-        foreach (string item in pockets)
-        {
-            Console.WriteLine(item);
-        }
-    }
-
     public void Sort(string[] arr, string[] sortingOrder)
     {
         foreach (string item in sortingOrder)
@@ -110,7 +99,6 @@ public class Pocket : MonoBehaviour
         Sort(arr, tempArr);
     }
 
-    // Make a method that uses this to remove the index from pocket aray
     public int BinarySearch(string[] arr, string target)
     {
         int left = 0;
@@ -136,6 +124,36 @@ public class Pocket : MonoBehaviour
         }
 
         return -1;
+    }
+
+    public static int LinearSearch(string[] arr, string item)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] == item)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static string[] RemoveItem(string[] arr, string item)
+    {
+        int itemIndex = LinearSearch(arr, item);
+        string[] newPockets = new string[arr.Length - 1];
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            if (i < itemIndex)
+            {
+                newPockets[i] = arr[i];
+            }
+            else if (i > itemIndex)
+            {
+                newPockets[i - 1] = arr[i];
+            }
+        }
+        return newPockets;
     }
 
 }
