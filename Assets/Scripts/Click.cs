@@ -1,67 +1,125 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro; // Required for TextMeshPro
 
 public class Click : MonoBehaviour
 {
-    public Button swordButton;
-    public Button gunButton;
-    public Button healthPotionButton;
-    public Button largeHealthPotionButton;
-
     private Coins _coins;
-    private Player _player;
-    private int wallet;
+    private int _wallet;
+    private bool _hasSword = false;
+    private bool _hasGun = false;
+
+    // References to the button GameObjects
+    public GameObject swordButton;
+    public GameObject gunButton;
+    public GameObject healthPotionButton;
+    public GameObject largeHealthPotionButton;
+
+    // Reference to the TextMeshProUGUI coin counter
+    public TextMeshProUGUI coinCounterText;
 
     void Start()
     {
-        swordButton.onClick.AddListener(SwordButtonClicked);
-        gunButton.onClick.AddListener(GunButtonClicked);
-        healthPotionButton.onClick.AddListener(HealthPotionButtonClicked);
-        largeHealthPotionButton.onClick.AddListener(LargeHealthPotionButtonClicked);
-
-        _coins = GetComponent<Coins>();
-        _player = GetComponent<Player>();
-
-        wallet = _coins.Wallet; // Assuming Wallet is a public property in Coins class
-    }
-
-    void SwordButtonClicked()
-    {
-        if (wallet >= 10)
+        // Get Coins component
+        _coins = FindObjectOfType<Coins>();
+        if (_coins != null)
         {
-            wallet -= 10;
-            _coins.UpdateCoins(wallet); // Update the Coins object
-            swordButton.gameObject.SetActive(false);
+            _wallet = _coins.GetCoins();
+            UpdateCoinCounter();
+            Debug.Log("Initial wallet value: " + _wallet);
+        }
+        else
+        {
+            Debug.LogError("Coins component not found in the scene!");
+        }
+
+        // Check if the coinCounterText is assigned
+        if (coinCounterText == null)
+        {
+            Debug.LogError("Coin counter text is not assigned in the Inspector!");
         }
     }
 
-    void GunButtonClicked()
+    public void SwordButtonClicked()
     {
-        if (wallet >= 20)
+        if (_wallet >= 10)
         {
-            wallet -= 20;
-            _coins.UpdateCoins(wallet); // Update the Coins object
-            gunButton.gameObject.SetActive(false);
+            _wallet -= 10;
+            Debug.Log("Sword purchased! Remaining wallet: " + _wallet);
+            swordButton.SetActive(false);
+            UpdateCoinCounter();
+            _hasSword = true;
+        }
+        else
+        {
+            Debug.Log("You're broke!");
         }
     }
 
-    void HealthPotionButtonClicked()
+    public void GunButtonClicked()
     {
-        if (wallet >= 5)
+        if (_wallet >= 20)
         {
-            wallet -= 5;
-            _coins.UpdateCoins(wallet); // Update the Coins object
-            healthPotionButton.gameObject.SetActive(false);
+            _wallet -= 20;
+            Debug.Log("Gun purchased! Remaining wallet: " + _wallet);
+            gunButton.SetActive(false);
+            UpdateCoinCounter();
+            _hasGun = true;
+        }
+        else
+        {
+            Debug.Log("You're broke!");
         }
     }
 
-    void LargeHealthPotionButtonClicked()
+    public void HealthPotionButtonClicked()
     {
-        if (wallet >= 10)
+        if (_wallet >= 5)
         {
-            wallet -= 10;
-            _coins.UpdateCoins(wallet); // Update the Coins object
-            largeHealthPotionButton.gameObject.SetActive(false);
+            _wallet -= 5;
+            Debug.Log("Health potion purchased! Remaining wallet: " + _wallet);
+            UpdateCoinCounter();
+        }
+        else
+        {
+            Debug.Log("You're broke!");
         }
     }
+
+    public void LargeHealthPotionButtonClicked()
+    {
+        if (_wallet >= 10)
+        {
+            _wallet -= 10;
+            Debug.Log("Large health potion purchased! Remaining wallet: " + _wallet);
+            UpdateCoinCounter();
+        }
+        else
+        {
+            Debug.Log("You're broke!");
+        }
+    }
+
+    // Updates the coin counter text
+    private void UpdateCoinCounter()
+    {
+        if (coinCounterText != null)
+        {
+            coinCounterText.text = "Coins: " + _wallet;
+        }
+        else
+        {
+            Debug.LogError("Coin counter text reference is missing!");
+        }
+    }
+
+    public bool DoesHaveSword()
+    {
+        return _hasSword;
+    }
+
+    public bool DoesHaveGun()
+    {
+        return _hasGun;
+    }
+
 }

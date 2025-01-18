@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    public int Wallet = 0;
+    public int Wallet = 5000;
 
     public void CoinsCreate(int initialAmount)
     {

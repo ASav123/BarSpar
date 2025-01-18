@@ -14,8 +14,6 @@ public class Player : Character
 
     private int _moveSpeed;
     
-
-
     void Start()
     {
         // Getts each of the sripts
