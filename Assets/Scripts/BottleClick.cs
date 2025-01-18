@@ -1,5 +1,6 @@
+// boddl cilck
 using UnityEngine;
-
+// written by chatgpt
 public class BottleClick : MonoBehaviour
 {
     private Safe bottle;
@@ -59,3 +60,4 @@ public class BottleClick : MonoBehaviour
         }
     }
 }
+

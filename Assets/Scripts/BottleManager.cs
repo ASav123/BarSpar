@@ -1,3 +1,5 @@
+// bawtyl mann-ijir 
+//written partially by chatgpt
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,18 +8,28 @@ public class BottleManager : MonoBehaviour
 {
     private List<Safe> bottles = new List<Safe>();
     private int consumedFruits = 0; // Track how many fruits have been consumed
-    private Beer beerBottle; // Store the beer bottle reference
-
+    
     public GameObject questionMarkPrefab;
     public GameObject fruitPrefab;
     public GameObject beerPrefab;
     public GameObject elixirPrefab;
     public GameObject poisonPrefab;
 
+    // aggrecation and composition: 
+    private Beer beerBottle; // Store the beer bottle reference
+    private Scenes _scenes;
+    private Coins _coins;
+
+
+    private BottleReveal bottleReveal; // Reference to the BottleReveal script
+
     void Start()
     {
         Debug.Log("Start method called");
+        bottleReveal = GetComponent<BottleReveal>(); // Get the BottleReveal component
         SpawnBottles(); // This will call SpawnBottles when the game starts
+        _scenes = GetComponent<Scenes>();
+        _coins = GetComponent<Coins>();
     }
 
     private void GenerateBottleList()
@@ -96,18 +108,24 @@ public class BottleManager : MonoBehaviour
             ((Beer)bottle).SetBeerIsConsumed(true);
             spriteRenderer.sprite = beerPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Beer has been consumed.");
+            bottleReveal.RevealRandomBottle();
         }
         else if (bottle is Elixir && !((Elixir)bottle).GetElixirIsConsumed())
         {
             ((Elixir)bottle).SetElixirIsConsumed(true);
             spriteRenderer.sprite = elixirPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Elixir has been consumed.");
+            this._coins.ChangeCoins(20);
+            this._scenes.PlayerDeath()
+;
         }
         else if (bottle is Poison && !((Poison)bottle).GetPoisonIsConsumed())
         {
             ((Poison)bottle).SetPoisonIsConsumed(true);
             spriteRenderer.sprite = poisonPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Poison has been consumed.");
+            this._scenes.PlayerWin();
+            this._coins.ChangeCoins(-20);
         }
     }
 
@@ -125,8 +143,9 @@ public class BottleManager : MonoBehaviour
             // Trigger the beer bottle reveal and consumption
             Debug.Log("Beer automatically consumed and revealed after 3 fruits.");
 
-            // Ensure all bottles are still clickable by re-enabling the colliders
             EnableColliders();
+
+
         }
     }
 

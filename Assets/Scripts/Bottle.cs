@@ -1,5 +1,4 @@
-
-
+//botl class
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,16 +78,16 @@ public class Fruit : Safe
     }
 }
 
-// Derived class for Beer
+
 public class Beer : Safe
 {
     private string _name;
-    private Fruit _fruit; // Aggregating a single fruit object inside Beer
+    private Fruit _fruit; // Aggregating a fruit object inside the beer, because the fruit and beer need to be connected in order for the beer to reveal the position of a fruit. However, since if all fruits are eaten, the beer is rendered useless, I will make the beer disappear as well when the fruit is eaten
 
     public Beer(bool isSafe, bool isConsumed, Fruit fruit) : base(isSafe, isConsumed)
     {
         _name = "Beer";
-        _fruit = fruit;  // Aggregating Fruit object inside Beer
+        _fruit = fruit;
     }
 
     public string GetBeerName()
@@ -111,7 +110,7 @@ public class Beer : Safe
         this.IsConsumed = isConsumed;
     }
 
-    // Checking if fruit is consumed, if yes, then beer is consumed
+    // Checking if fruit is consumed, if all three are consumed, then so will the beer
     public void CheckAndConsumeBeer()
     {
         if (_fruit.GetFruitIsConsumed()) // If the fruit is consumed
@@ -122,7 +121,6 @@ public class Beer : Safe
     }
 }
 
-// Derived class for Elixir
 class Elixir : Safe
 {
     private string _name;
@@ -160,7 +158,7 @@ class Poison : Safe
     public Poison(bool isSafe, bool isConsumed) : base(isSafe, isConsumed)  // Poison is not safe
     {
         _name = "Poison";
-        IsSafe = false;  // Poison is unsafe
+        IsSafe = false;  // Poison is unsafe, so here I overrode the inheritance and made isSafe to false.
     }
 
     public string GetPoisonName()
@@ -183,4 +181,3 @@ class Poison : Safe
         this.IsConsumed = isConsumed;
     }
 }
-

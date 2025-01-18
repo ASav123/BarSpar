@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a63c4e193856f4aa325238902fb112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsText: {fileID: 1420398262}
+  Wallet: 5000
 --- !u!114 &457240051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,6 +983,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6008466961031564097fcc0dd350fc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1130158744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1130158746}
+  - component: {fileID: 1130158745}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1130158745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130158744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e3fb77e8d61334db78dd5a5463c84d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruitPrefab: {fileID: 6686718158442532570, guid: a67a3bb2f107f574ab965fed27fca092, type: 3}
+  poisonPrefab: {fileID: 2558467158665979334, guid: 0e209c30c9ceef349b865792a9f5f7e9, type: 3}
+--- !u!4 &1130158746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130158744}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.084293, y: 0.9814523, z: 144.42575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420398260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,3 +1670,4 @@ SceneRoots:
   - {fileID: 199337137}
   - {fileID: 228186561}
   - {fileID: 2003443343}
+  - {fileID: 1130158746}
