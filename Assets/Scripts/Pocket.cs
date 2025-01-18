@@ -6,12 +6,17 @@ using UnityEngine;
 public class Pocket : MonoBehaviour
 {
     private string[] _playerPocket;
-    private int _playerPocketPointer;
+    private string[] _sortingOrder;
 
-    private int _countCoins;
-    private int _countHearts;
-    private int _countKeys;
-    private int _countFlower;
+    private bool _hasKey;
+
+    private void Start()
+    {
+        Debug.Log("Running");
+        this._sortingOrder = new string[] { "coin", "flower", "heart", "key" };
+        this._hasKey = false;
+
+    }
 
     public void PocketAdd(string item)
     {
@@ -29,26 +34,33 @@ public class Pocket : MonoBehaviour
             newPlayerPocket[newPlayerPocket.Length - 1] = item;
             this._playerPocket = newPlayerPocket;
         }
-        foreach (string playerPocket in this._playerPocket)
+
+        if (item == "key")
         {
-            Debug.Log(playerPocket);
+            this._hasKey = true;
         }
-        Debug.Log("");
+
+        InstanceSort();
+
     }
 
-    public void Sort(string[] arr, string[] sortingOrder)
+    public void Sort(string[] sortingOrder)
     {
+        foreach (string key in sortingOrder) {
+            Debug.Log(key);
+        }
         foreach (string item in sortingOrder)
         {
-            for (int cursor = 0; cursor < arr.Length; cursor++)
+            for (int cursor = 0; cursor < this._playerPocket.Length; cursor++)
             {
-                for (int i = 0; i < arr.Length; i++)
+                for (int i = 0; i < this._playerPocket.Length; i++)
                 {
-                    if (arr[cursor] != item && arr[i] == item)
+                    if (this._playerPocket[cursor] != item && this._playerPocket[i] == item)
                     {
-                        string tempItem = arr[i];
-                        arr[i] = arr[cursor];
-                        arr[cursor] = tempItem;
+                        string tempItem = this._playerPocket[i];
+                        this._playerPocket[i] = this._playerPocket[cursor];
+                        this._playerPocket[cursor] = tempItem;
+                        Debug.Log("Swapping");
                     }
 
                 }
@@ -56,24 +68,24 @@ public class Pocket : MonoBehaviour
         }
     }
 
-    public void InstanceSort(string[] arr)
+    public void InstanceSort()
     {
         int coinCount = 0;
         int heartCount = 0;
         int flowerCount = 0;
         int keyCount = 0;
 
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < this._playerPocket.Length; i++)
         {
-            if (arr[i] == "coin")
+            if (this._playerPocket[i] == "coin")
             {
                 coinCount++;
             }
-            else if (arr[i] == "heart")
+            else if (this._playerPocket[i] == "heart")
             {
                 heartCount++;
             }
-            else if (arr[i] == "flower")
+            else if (this._playerPocket[i] == "flower")
             {
                 flowerCount++;
             }
@@ -82,32 +94,32 @@ public class Pocket : MonoBehaviour
                 keyCount++;
             }
         }
-        string[] tempArr = new string[4];
+        string[] tempOrder = new string[4];
         if (coinCount > heartCount)
         {
-            tempArr[0] = "coin";
-            tempArr[1] = "heart";
+            tempOrder[0] = "coin";
+            tempOrder[1] = "heart";
         }
         else
         {
-            tempArr[0] = "heart";
-            tempArr[1] = "coin";
+            tempOrder[0] = "heart";
+            tempOrder[1] = "coin";
         }
-        tempArr[2] = "flower";
-        tempArr[3] = "key";
+        tempOrder[2] = "flower";
+        tempOrder[3] = "key";
 
-        Sort(arr, tempArr);
+        Sort(tempOrder);
     }
 
-    public int BinarySearch(string[] arr, string target)
+    public int BinarySearch(string target)
     {
         int left = 0;
-        int right = arr.Length - 1;
+        int right = this._playerPocket.Length - 1;
 
         while (left <= right)
         {
             int mid = (left + right) / 2;
-            int comparison = string.Compare(arr[mid], target, System.StringComparison.Ordinal);
+            int comparison = string.Compare(this._playerPocket[mid], target, System.StringComparison.Ordinal);
 
             if (comparison == 0)
             {
@@ -126,11 +138,11 @@ public class Pocket : MonoBehaviour
         return -1;
     }
 
-    public static int LinearSearch(string[] arr, string item)
+    public int LinearSearch(string item)
     {
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < this._playerPocket.Length; i++)
         {
-            if (arr[i] == item)
+            if (this._playerPocket[i] == item)
             {
                 return i;
             }
@@ -138,22 +150,34 @@ public class Pocket : MonoBehaviour
         return -1;
     }
 
-    public static string[] RemoveItem(string[] arr, string item)
+    public void RemoveItem(string item)
     {
-        int itemIndex = LinearSearch(arr, item);
-        string[] newPockets = new string[arr.Length - 1];
-        for (int i = 0; i < arr.Length - 1; i++)
-        {
-            if (i < itemIndex)
+        int itemIndex = BinarySearch(item);
+
+        if (itemIndex != -1) {
+            string[] newPockets = new string[this._playerPocket.Length - 1];
+            for (int i = 0; i < this._playerPocket.Length - 1; i++)
             {
-                newPockets[i] = arr[i];
+                if (i < itemIndex)
+                {
+                    newPockets[i] = this._playerPocket[i];
+                }
+                else if (i > itemIndex)
+                {
+                    newPockets[i - 1] = this._playerPocket[i];
+                }
             }
-            else if (i > itemIndex)
-            {
-                newPockets[i - 1] = arr[i];
+            this._playerPocket = newPockets;
+
+            if (item == "key") {
+                this._hasKey = false;
             }
         }
-        return newPockets;
+
+    }
+
+    public bool GetKeuStatus() { 
+        return this._hasKey;
     }
 
 }
