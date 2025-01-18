@@ -1,18 +1,12 @@
-// mostly written with chatgpt
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class BottleManager : MonoBehaviour
 {
-    private Scenes _scenes;
     private List<Safe> bottles = new List<Safe>();
     private int consumedFruits = 0; // Track how many fruits have been consumed
     private Beer beerBottle; // Store the beer bottle reference
-
-    private Character _character;
-    private Coins _coins;
 
     public GameObject questionMarkPrefab;
     public GameObject fruitPrefab;
@@ -22,9 +16,6 @@ public class BottleManager : MonoBehaviour
 
     void Start()
     {
-        _character = GetComponent<Character>();
-        _scenes = GetComponent<Scenes>();
-        _coins = GetComponent<Coins>();
         Debug.Log("Start method called");
         SpawnBottles(); // This will call SpawnBottles when the game starts
     }
@@ -58,7 +49,7 @@ public class BottleManager : MonoBehaviour
         GenerateBottleList();
 
         // Adjust the spawn position offset for more space between bottles
-        float xOffset = -7f; // Shift the bottles a little more to the left
+        float xOffset = -6f; // Shift the bottles a tad to the left (more negative value)
         float spacing = 2.5f; // Space between bottles
 
         for (int i = 0; i < bottles.Count; i++)
@@ -79,8 +70,6 @@ public class BottleManager : MonoBehaviour
             // The sprite remains as the question mark until revealed
         }
     }
-
-
 
 
     internal void RevealBottle(GameObject bottleObject, Safe bottle)
@@ -111,58 +100,18 @@ public class BottleManager : MonoBehaviour
         else if (bottle is Elixir && !((Elixir)bottle).GetElixirIsConsumed())
         {
             ((Elixir)bottle).SetElixirIsConsumed(true);
-            spriteRenderer.sprite = elixirPrefab.GetComponent<SpriteRenderer>()?.sprite;
-
-            if (GameData.Instance == null)
-            {
-                Debug.LogError("GameData.Instance is null! Cannot update player stats.");
-                return;
-            }
-
-            GameData.Instance.PlayerHealth += 20; // Increase health
-            GameData.Instance.PlayerCoins += 20; // Increase coins
-
-            Debug.Log($"Elixir consumed. Health: {GameData.Instance.PlayerHealth}, Coins: {GameData.Instance.PlayerCoins}");
-
-            // Check if scene transition method is functional
-            if (_scenes == null)
-            {
-                Debug.LogError("_scenes is null! Cannot transition to Win scene.");
-                return;
-            }
-
-            _scenes.PlayerWin();
+            spriteRenderer.sprite = elixirPrefab.GetComponent<SpriteRenderer>().sprite;
+            Debug.Log("Elixir has been consumed.");
         }
         else if (bottle is Poison && !((Poison)bottle).GetPoisonIsConsumed())
         {
             ((Poison)bottle).SetPoisonIsConsumed(true);
-            spriteRenderer.sprite = poisonPrefab.GetComponent<SpriteRenderer>()?.sprite;
-
-            if (GameData.Instance == null)
-            {
-                Debug.LogError("GameData.Instance is null! Cannot update player stats.");
-                return;
-            }
-
-            GameData.Instance.PlayerHealth -= 20; // Decrease health
-            GameData.Instance.PlayerCoins -= 20; // Decrease coins
-
-            Debug.Log($"Poison consumed. Health: {GameData.Instance.PlayerHealth}, Coins: {GameData.Instance.PlayerCoins}");
-
-            // Check if scene transition method is functional
-            if (_scenes == null)
-            {
-                Debug.LogError("_scenes is null! Cannot transition to Lose scene.");
-                return;
-            }
-
-            _scenes.PlayerDeath();
+            spriteRenderer.sprite = poisonPrefab.GetComponent<SpriteRenderer>().sprite;
+            Debug.Log("Poison has been consumed.");
         }
-
     }
 
-    // Additional methods to handle revealing fruit or poison directly
-
+    // Method to automatically reveal and consume the beer bottle after 3 fruits are consumed
     private void ConsumeBeer()
     {
         if (beerBottle != null && !beerBottle.GetBeerIsConsumed())
@@ -175,6 +124,23 @@ public class BottleManager : MonoBehaviour
 
             // Trigger the beer bottle reveal and consumption
             Debug.Log("Beer automatically consumed and revealed after 3 fruits.");
+
+            // Ensure all bottles are still clickable by re-enabling the colliders
+            EnableColliders();
+        }
+    }
+
+    private void EnableColliders()
+    {
+        // Ensure that all bottles still have colliders enabled
+        var bottleClickObjects = FindObjectsOfType<BottleClick>();
+        foreach (var bottleClick in bottleClickObjects)
+        {
+            BoxCollider2D boxCollider = bottleClick.GetComponent<BoxCollider2D>();
+            if (boxCollider != null)
+            {
+                boxCollider.enabled = true; // Enable the collider for the bottle
+            }
         }
     }
 }
