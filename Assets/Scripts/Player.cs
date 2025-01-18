@@ -41,6 +41,8 @@ public class Player : Character
         Vector2 moveDirection = new Vector2(moveX, moveY).normalized;
         transform.Translate(moveDirection * this._moveSpeed * Time.deltaTime);
 
+        Debug.Log(_pocket.GetKeuStatus());
+
     }
 
     // Player constructor using base class of character
@@ -60,7 +62,11 @@ public class Player : Character
     {
         if (collision.gameObject.CompareTag("Bar"))
         {
-            this._scenes.PlayGame();
+            if (_pocket.GetKeuStatus() == true) {
+
+                this._scenes.PlayGame();
+
+            }
         }
 
         if (collision.gameObject.CompareTag("Ghost"))
@@ -75,7 +81,7 @@ public class Player : Character
         {
             this.ChangeHealth(5);
             GameData.Instance.PlayerHealth = this.GetHealth();
-            this._pocket.PocketAdd("Heart");
+            this._pocket.PocketAdd("heart");
 
 
         }
@@ -84,18 +90,18 @@ public class Player : Character
         {
             this._coins.ChangeCoins(5);
             GameData.Instance.PlayerCoins = this._coins.GetCoins();
-            this._pocket.PocketAdd("Coin");
+            this._pocket.PocketAdd("coin");
 
         }
 
         if (collision.gameObject.CompareTag("Flower"))
         {
-            this._pocket.PocketAdd("Flower");
+            this._pocket.PocketAdd("flower");
         }
 
         if (collision.gameObject.CompareTag("Key"))
         {
-            this._pocket.PocketAdd("Key");
+            this._pocket.PocketAdd("key");
         }
     }
 }
