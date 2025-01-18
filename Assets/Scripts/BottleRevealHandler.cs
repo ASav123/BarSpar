@@ -37,47 +37,47 @@ public class BottleReveal : MonoBehaviour
         }
     }
 
-    // Pigeonhole Sort Implementation
+    // Pigeonhole Sort Implementation (Prioritize "reveal fruit")
     private void PigeonholeSort(string[] array)
     {
-        int min = 0;
-        int max = 1;
+        // Create two buckets: one for "reveal fruit" and one for "reveal poison"
+        List<string>[] holes = new List<string>[2];
+        holes[0] = new List<string>(); // for "reveal fruit"
+        holes[1] = new List<string>(); // for "reveal poison"
 
-        List<string>[] holes = new List<string>[max - min + 1];
-        for (int i = 0; i < holes.Length; i++)
-        {
-            holes[i] = new List<string>();
-        }
-
+        // Step through the array and categorize each item into its respective bucket
         foreach (var item in array)
         {
-            int index = item == "reveal fruit" ? 0 : 1; // 0 for fruit, 1 for poison
-            holes[index].Add(item);
+            if (item == "reveal fruit")
+                holes[0].Add(item);  // Add "reveal fruit" to the first bucket
+            else
+                holes[1].Add(item);  // Add "reveal poison" to the second bucket
         }
 
-        int index2 = 0;
+        // Reconstruct the array: first add "reveal fruit" from the first bucket, then "reveal poison" from the second
+        int index = 0;
         foreach (var hole in holes)
         {
             foreach (var item in hole)
             {
-                array[index2++] = item;
+                array[index++] = item;
             }
         }
     }
 
-    // Binary Search for non-integer values
+    // Binary Search for non-integer values (search for "reveal fruit" or "reveal poison")
     private int BinarySearch(string[] array, string target)
     {
         int low = 0, high = array.Length - 1;
         while (low <= high)
         {
             int mid = (low + high) / 2;
-            int comparison = string.Compare(array[mid], target);
-            if (comparison == 0) return mid;
-            if (comparison < 0) low = mid + 1;
+            int comparison = string.Compare(array[mid], target);  // Compare strings directly
+            if (comparison == 0) return mid; // If target is found, return the index
+            if (comparison < 0) low = mid + 1; // Otherwise, narrow down the search
             else high = mid - 1;
         }
-        return -1; // Not found
+        return -1; // If not found, return -1
     }
 
     // Method to reveal a fruit bottle

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// written by chatgpt
 public class BottleClick : MonoBehaviour
 {
     private Safe bottle;
