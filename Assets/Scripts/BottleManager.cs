@@ -1,6 +1,8 @@
+// mostly written with chatgpt
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class BottleManager : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class BottleManager : MonoBehaviour
     private List<Safe> bottles = new List<Safe>();
     private int consumedFruits = 0; // Track how many fruits have been consumed
     private Beer beerBottle; // Store the beer bottle reference
+
+    private Character _character;
+    private Coins _coins;
 
     public GameObject questionMarkPrefab;
     public GameObject fruitPrefab;
@@ -17,7 +22,9 @@ public class BottleManager : MonoBehaviour
 
     void Start()
     {
+        _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
+        _coins = GetComponent<Coins>();
         Debug.Log("Start method called");
         SpawnBottles(); // This will call SpawnBottles when the game starts
     }
@@ -51,7 +58,7 @@ public class BottleManager : MonoBehaviour
         GenerateBottleList();
 
         // Adjust the spawn position offset for more space between bottles
-        float xOffset = -6f; // Shift the bottles a tad to the left (more negative value)
+        float xOffset = -7f; // Shift the bottles a little more to the left
         float spacing = 2.5f; // Space between bottles
 
         for (int i = 0; i < bottles.Count; i++)
@@ -72,6 +79,9 @@ public class BottleManager : MonoBehaviour
             // The sprite remains as the question mark until revealed
         }
     }
+
+
+
 
     internal void RevealBottle(GameObject bottleObject, Safe bottle)
     {
