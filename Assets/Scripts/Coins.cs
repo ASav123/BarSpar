@@ -1,44 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Coins : MonoBehaviour
 {
-    //Connects script to textbox boject
-    [SerializeField] private TextMeshProUGUI _coinsText;
+    public int Wallet = 0;
 
-    //Coin attributes
-    private int _coins;
-
-    void Start()
+    public void CoinsCreate(int initialAmount)
     {
-        this._coins = GameData.Instance.PlayerCoins;
+        Wallet = initialAmount;
     }
 
-    void Update()
+    public void UpdateCoins(int newAmount)
     {
-        //Updates coin textbox
-        this._coinsText.text = string.Format($"Coins: {this.GetCoins()}");
+        Wallet = newAmount;
     }
 
-    //Coin constructor
-    public void CoinsCreate(int coins)
+    public void ChangeCoins(int amount)
     {
-        this._coins = coins;
+        Wallet += amount;
     }
 
-    //Getters and setters
-    public int GetCoins()
-    {
-        return this._coins;
+    public int GetCoins() {
+        return Wallet;
     }
-    public void ChangeCoins(int changeBy)
-    {
-        if ((this._coins += changeBy) >= 0) {
-            this._coins += changeBy;
-        }
-    }
-
-   
 }

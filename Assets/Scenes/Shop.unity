@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 307215771}
   - component: {fileID: 307215770}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 931716120}
   - component: {fileID: 931716119}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1215,7 +1215,7 @@ GameObject:
   - component: {fileID: 1532024729}
   - component: {fileID: 1532024728}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Health Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1470,7 +1470,7 @@ GameObject:
   - component: {fileID: 1881693414}
   - component: {fileID: 1881693413}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Large Health Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
