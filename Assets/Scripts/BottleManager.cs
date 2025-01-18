@@ -14,9 +14,12 @@ public class BottleManager : MonoBehaviour
     public GameObject elixirPrefab;
     public GameObject poisonPrefab;
 
+    private BottleReveal bottleReveal; // Reference to the BottleReveal script
+
     void Start()
     {
         Debug.Log("Start method called");
+        bottleReveal = GetComponent<BottleReveal>(); // Get the BottleReveal component
         SpawnBottles(); // This will call SpawnBottles when the game starts
     }
 
@@ -96,6 +99,7 @@ public class BottleManager : MonoBehaviour
             ((Beer)bottle).SetBeerIsConsumed(true);
             spriteRenderer.sprite = beerPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Beer has been consumed.");
+            bottleReveal.RevealRandomBottle();
         }
         else if (bottle is Elixir && !((Elixir)bottle).GetElixirIsConsumed())
         {
@@ -125,8 +129,9 @@ public class BottleManager : MonoBehaviour
             // Trigger the beer bottle reveal and consumption
             Debug.Log("Beer automatically consumed and revealed after 3 fruits.");
 
-            // Ensure all bottles are still clickable by re-enabling the colliders
             EnableColliders();
+
+
         }
     }
 
