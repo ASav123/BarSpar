@@ -15,6 +15,7 @@ public class Scenes : MonoBehaviour
     public void EnterMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        GameData.Instance.ResetData();
     }
 
     // Runs when player health reaches zero

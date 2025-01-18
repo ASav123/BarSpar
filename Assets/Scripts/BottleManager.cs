@@ -5,6 +5,8 @@ using UnityEngine;
 public class BottleManager : MonoBehaviour
 {
     private List<Safe> bottles = new List<Safe>();
+    private int consumedFruits = 0; // Track how many fruits have been consumed
+    private Beer beerBottle; // Store the beer bottle reference
 
     public GameObject questionMarkPrefab;
     public GameObject fruitPrefab;
@@ -22,14 +24,17 @@ public class BottleManager : MonoBehaviour
     {
         bottles.Clear();
 
+        // Create the bottles, including the Beer bottle
+        beerBottle = new Beer(true, false, new Fruit(true, false)); // Store the beer bottle reference here
         bottles.Add(new Elixir(true, false));
-        bottles.Add(new Beer(true, false, new Fruit(true, false)));
+        bottles.Add(beerBottle);  // Add beer bottle to the list
         bottles.Add(new Poison(false, false));
         bottles.Add(new Poison(false, false));
         bottles.Add(new Fruit(true, false));
         bottles.Add(new Fruit(true, false));
         bottles.Add(new Fruit(true, false));
 
+        // Shuffle the bottles randomly
         for (int i = 0; i < bottles.Count; i++)
         {
             Safe temp = bottles[i];
@@ -43,12 +48,13 @@ public class BottleManager : MonoBehaviour
     {
         GenerateBottleList();
 
-        // Adjust the spawn position offset
-        float xOffset = -5f; // Moves bottles more to the left
+        // Adjust the spawn position offset for more space between bottles
+        float xOffset = -6f; // Shift the bottles a tad to the left (more negative value)
+        float spacing = 2.5f; // Space between bottles
 
         for (int i = 0; i < bottles.Count; i++)
         {
-            Vector3 spawnPosition = new Vector3(i * 2 + xOffset, 0, 0);
+            Vector3 spawnPosition = new Vector3(i * spacing + xOffset, 0, 0); // Apply offset and spacing
             GameObject bottlePrefab = Instantiate(questionMarkPrefab, spawnPosition, Quaternion.identity);
 
             // Initialize the bottle with the BottleClick script
@@ -74,8 +80,16 @@ public class BottleManager : MonoBehaviour
         if (bottle is Fruit && !((Fruit)bottle).GetFruitIsConsumed())
         {
             ((Fruit)bottle).SetFruitIsConsumed(true);
+            consumedFruits++; // Increment consumed fruits count
             spriteRenderer.sprite = fruitPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Fruit has been consumed.");
+
+            // Check if three fruits have been consumed
+            if (consumedFruits >= 3)
+            {
+                // Automatically reveal the beer bottle if three fruits are consumed
+                ConsumeBeer();
+            }
         }
         else if (bottle is Beer && !((Beer)bottle).GetBeerIsConsumed())
         {
@@ -94,6 +108,39 @@ public class BottleManager : MonoBehaviour
             ((Poison)bottle).SetPoisonIsConsumed(true);
             spriteRenderer.sprite = poisonPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Poison has been consumed.");
+        }
+    }
+
+    // Method to automatically reveal and consume the beer bottle after 3 fruits are consumed
+    private void ConsumeBeer()
+    {
+        if (beerBottle != null && !beerBottle.GetBeerIsConsumed())
+        {
+            beerBottle.SetBeerIsConsumed(true);
+            // Automatically reveal the beer bottle sprite
+            GameObject beerBottleObject = FindObjectOfType<BottleClick>().gameObject;
+            SpriteRenderer spriteRenderer = beerBottleObject.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = beerPrefab.GetComponent<SpriteRenderer>().sprite;
+
+            // Trigger the beer bottle reveal and consumption
+            Debug.Log("Beer automatically consumed and revealed after 3 fruits.");
+
+            // Ensure all bottles are still clickable by re-enabling the colliders
+            EnableColliders();
+        }
+    }
+
+    private void EnableColliders()
+    {
+        // Ensure that all bottles still have colliders enabled
+        var bottleClickObjects = FindObjectsOfType<BottleClick>();
+        foreach (var bottleClick in bottleClickObjects)
+        {
+            BoxCollider2D boxCollider = bottleClick.GetComponent<BoxCollider2D>();
+            if (boxCollider != null)
+            {
+                boxCollider.enabled = true; // Enable the collider for the bottle
+            }
         }
     }
 }
