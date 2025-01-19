@@ -9,15 +9,10 @@ public class Pocket : MonoBehaviour
     private string[] _playerPocket;
     private string[] _sortingOrder;
 
-    // Players attributes
-    //private bool _hasKey;
-
-
-    // Creates soring order and sets key to false
     private void Start()
     {
+        // Creates soring order and sets key to false
         this._sortingOrder = new string[] { "coin", "flower", "heart", "key" };
-        //this._hasKey = false;
 
     }
 
@@ -42,20 +37,15 @@ public class Pocket : MonoBehaviour
             this._playerPocket = newPlayerPocket;
         }
 
-        //if (item == "key")
-        //{
-        //    this._hasKey = true;
-        //}
-
-        // Sorts array after item is added
         InstanceSort();
 
     }
 
-
+    // MODIFIED EXCHANGE SORT
+    // Using the sorting order sorts players pockets into that order
     public void Sort(string[] sortingOrder)
     {
-
+        // Exchange sort for one item at a time
         foreach (string item in sortingOrder)
         {
             for (int cursor = 0; cursor < this._playerPocket.Length; cursor++)
@@ -74,6 +64,7 @@ public class Pocket : MonoBehaviour
         }
     }
 
+    // Sorts players pockets by amount of each item and groups items together from highest to lowest based on their amount
     public void InstanceSort()
     {
         int coinCount = 0;
@@ -81,6 +72,7 @@ public class Pocket : MonoBehaviour
         int flowerCount = 0;
         int keyCount = 0;
 
+        // Counts each item
         for (int i = 0; i < this._playerPocket.Length; i++)
         {
             if (this._playerPocket[i] == "coin")
@@ -100,6 +92,7 @@ public class Pocket : MonoBehaviour
                 keyCount++;
             }
         }
+        // Created the highest to lowest item order
         string[] tempOrder = new string[4];
         if (coinCount > heartCount)
         {
@@ -114,27 +107,35 @@ public class Pocket : MonoBehaviour
         tempOrder[2] = "flower";
         tempOrder[3] = "key";
 
+        // Sends to exhcange sort algorithm
         Sort(tempOrder);
     }
 
+
+    //BINARY SEARCH
+    // Binary search on a sorted players pockets array and returns index
     public int BinarySearch(string target)
     {
         int left = 0;
         int right = this._playerPocket.Length - 1;
 
+        // Compares values of strings until the target string is found 
         while (left <= right)
         {
             int mid = (left + right) / 2;
             int comparison = string.Compare(this._playerPocket[mid], target, System.StringComparison.Ordinal);
 
+            // If value = 0 then target is found
             if (comparison == 0)
             {
                 return mid;
             }
+            // If value < 0 then target is to the right of mid
             else if (comparison < 0)
             {
                 left = mid + 1;
             }
+            // Else target is to the left of mid
             else
             {
                 right = mid - 1;
@@ -144,6 +145,8 @@ public class Pocket : MonoBehaviour
         return -1;
     }
 
+    // LINEAR SEARCH
+    // Linear search on sorted players pockets and returns index
     public int LinearSearch(string item)
     {
         for (int i = 0; i < this._playerPocket.Length; i++)
@@ -156,10 +159,13 @@ public class Pocket : MonoBehaviour
         return -1;
     }
 
+    // Removes an item from players pockets
     public void RemoveItem(string item)
     {
+        // Uses the binary search to find the items index
         int itemIndex = BinarySearch(item);
 
+        // If item is found a one smaller array is made and copies all strings exept taarget index value
         if (itemIndex != -1) {
             string[] newPockets = new string[this._playerPocket.Length - 1];
             for (int i = 0; i < this._playerPocket.Length - 1; i++)
@@ -175,13 +181,12 @@ public class Pocket : MonoBehaviour
             }
             this._playerPocket = newPockets;
 
-            //if (item == "key") {
-            //    this._hasKey = false;
-            //}
+
         }
 
     }
 
+    // Seaches for "key" in players pockets using binary search
     public bool GetKeuStatus() {
         int reuslt = BinarySearch("key");
         if (reuslt != -1)

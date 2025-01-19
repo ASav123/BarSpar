@@ -9,6 +9,7 @@ public class Player : Character
     private Character _character;
     private Scenes _scenes;
     private Coins _coins;
+    private CoinsUpdate _coinsUpdate;
     private Pocket _pocket;
     private int _moveSpeed;
     
@@ -18,6 +19,7 @@ public class Player : Character
         _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
         _coins = GetComponent<Coins>();
+        _coinsUpdate = GetComponent<CoinsUpdate>();
         _pocket = GetComponent<Pocket>();
 
 
@@ -43,11 +45,11 @@ public class Player : Character
     public void PlayerCreate(string name, int health, int maxHealth, int damage, int moveSpeed, int coins)
     {
         // Uses base class constructer 
-        this.CharacterCreate(name, health, maxHealth, damage);
+        base.CharacterCreate(name, health, maxHealth, damage);
         this._moveSpeed = moveSpeed;
 
         // Coins created though composition (strong)
-        this._coins.CoinsCreate(coins);
+        this._coinsUpdate.CoinsCreate(coins);
     }
 
   
@@ -59,6 +61,7 @@ public class Player : Character
     {
         if (collision.gameObject.CompareTag("Bar"))
         {
+            // Calls method that searches players pockets for key
             if (_pocket.GetKeuStatus() == true) {
 
                 this._scenes.PlayGame();
@@ -88,8 +91,8 @@ public class Player : Character
         // Coin
         if (collision.gameObject.CompareTag("Coin"))
         {
-            this._coins.ChangeCoins(5);
-            GameData.Instance.PlayerCoins = this._coins.GetCoins();
+            this._coinsUpdate.ChangeCoins(5);
+            GameData.Instance.PlayerCoins = this._coinsUpdate.GetCoins();
             this._pocket.PocketAdd("coin");
 
         }
