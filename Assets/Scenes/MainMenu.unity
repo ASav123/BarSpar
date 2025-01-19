@@ -700,8 +700,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4279834988
+  m_fontColor: {r: 0.4245283, g: 0.09812211, b: 0.09812211, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a63c4e193856f4aa325238902fb112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsText: {fileID: 0}
+  Wallet: 5000
 --- !u!114 &540411542
 MonoBehaviour:
   m_ObjectHideFlags: 0

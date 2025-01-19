@@ -5,25 +5,32 @@ using UnityEngine;
 
 public class Pocket : MonoBehaviour
 {
+    // Arrays for players pockets
     private string[] _playerPocket;
     private string[] _sortingOrder;
 
-    private bool _hasKey;
+    // Players attributes
+    //private bool _hasKey;
 
+
+    // Creates soring order and sets key to false
     private void Start()
     {
-        Debug.Log("Running");
         this._sortingOrder = new string[] { "coin", "flower", "heart", "key" };
-        this._hasKey = false;
+        //this._hasKey = false;
 
     }
 
+    // Adds an item pocked up to players pockets
     public void PocketAdd(string item)
     {
+        // Creates a new array if one does not yet exist
         if (this._playerPocket == null)
         {
             this._playerPocket = new string[] { item };
         }
+
+        // Creates an array with an extra slot and adds item
         else
         {
             string[] newPlayerPocket = new string[this._playerPocket.Length + 1];
@@ -35,20 +42,20 @@ public class Pocket : MonoBehaviour
             this._playerPocket = newPlayerPocket;
         }
 
-        if (item == "key")
-        {
-            this._hasKey = true;
-        }
+        //if (item == "key")
+        //{
+        //    this._hasKey = true;
+        //}
 
+        // Sorts array after item is added
         InstanceSort();
 
     }
 
+
     public void Sort(string[] sortingOrder)
     {
-        foreach (string key in sortingOrder) {
-            Debug.Log(key);
-        }
+
         foreach (string item in sortingOrder)
         {
             for (int cursor = 0; cursor < this._playerPocket.Length; cursor++)
@@ -60,7 +67,6 @@ public class Pocket : MonoBehaviour
                         string tempItem = this._playerPocket[i];
                         this._playerPocket[i] = this._playerPocket[cursor];
                         this._playerPocket[cursor] = tempItem;
-                        Debug.Log("Swapping");
                     }
 
                 }
@@ -169,15 +175,23 @@ public class Pocket : MonoBehaviour
             }
             this._playerPocket = newPockets;
 
-            if (item == "key") {
-                this._hasKey = false;
-            }
+            //if (item == "key") {
+            //    this._hasKey = false;
+            //}
         }
 
     }
 
-    public bool GetKeuStatus() { 
-        return this._hasKey;
+    public bool GetKeuStatus() {
+        int reuslt = BinarySearch("key");
+        if (reuslt != -1)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
     }
 
 }

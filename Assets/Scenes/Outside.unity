@@ -1165,6 +1165,7 @@ GameObject:
   - component: {fileID: 411282799}
   - component: {fileID: 411282800}
   - component: {fileID: 411282801}
+  - component: {fileID: 411282802}
   m_Layer: 0
   m_Name: Dave
   m_TagString: Player
@@ -1360,7 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a63c4e193856f4aa325238902fb112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsText: {fileID: 1687299061}
+  Wallet: 5000
 --- !u!114 &411282801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,6 +1374,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7381e172fae9e4cb45cae35b2e896a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &411282802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411282792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caabb6e5c95fd5e4a84f7d99c7f7d75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinsText: {fileID: 1687299061}
 --- !u!1 &420704631
 GameObject:
   m_ObjectHideFlags: 0

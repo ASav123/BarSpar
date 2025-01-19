@@ -714,6 +714,7 @@ GameObject:
   - component: {fileID: 972493745}
   - component: {fileID: 972493744}
   - component: {fileID: 972493743}
+  - component: {fileID: 972493746}
   m_Layer: 5
   m_Name: Coins
   m_TagString: Untagged
@@ -752,7 +753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a63c4e193856f4aa325238902fb112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsText: {fileID: 972493744}
+  Wallet: 5000
 --- !u!114 &972493744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +851,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972493741}
   m_CullTransparentMesh: 1
+--- !u!114 &972493746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972493741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caabb6e5c95fd5e4a84f7d99c7f7d75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinsText: {fileID: 972493744}
 --- !u!1 &1129822216
 GameObject:
   m_ObjectHideFlags: 0
