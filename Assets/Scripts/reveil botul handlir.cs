@@ -17,16 +17,16 @@ public class BottleReveal : MonoBehaviour
             actions[i] = Random.Range(0, 2) == 0 ? "reveal poison" : "reveal fruit";
         }
 
-        // Step 2: Pigeonhole Sort the list
+        // Step 2: Pigeon hole Sort
         PigeonholeSort(actions);
 
         // Step 3: Randomly pick a "reveal poison" or "reveal fruit"
         string chosenAction = actions[Random.Range(0, actions.Length)];
 
-        // Step 4: Binary search for the chosen action
+        // Step 4: Binary search 
         int index = BinarySearch(actions, chosenAction);
 
-        // Step 5: Reveal the bottle based on the binary search result
+        // Step 5: Reveal the bottle based on whether my code gets "revel poison" or "reveal fruit"
         if (actions[index] == "reveal poison")
         {
             RevealPoison();
@@ -40,12 +40,12 @@ public class BottleReveal : MonoBehaviour
     // Pigeonhole Sort Implementation (Prioritize "reveal fruit")
     private void PigeonholeSort(string[] array)
     {
-        // Create two buckets: one for "reveal fruit" and one for "reveal poison"
+        //  two buckets: "reveal fruit" and"reveal poison"
         List<string>[] holes = new List<string>[2];
-        holes[0] = new List<string>(); // for "reveal fruit"
-        holes[1] = new List<string>(); // for "reveal poison"
+        holes[0] = new List<string>(); // reveal fruit
+        holes[1] = new List<string>(); // reveal poison
 
-        // Step through the array and categorize each item into its respective bucket
+        // put each item in its bucket
         foreach (var item in array)
         {
             if (item == "reveal fruit")
@@ -54,7 +54,7 @@ public class BottleReveal : MonoBehaviour
                 holes[1].Add(item);  // Add "reveal poison" to the second bucket
         }
 
-        // Reconstruct the array: first add "reveal fruit" from the first bucket, then "reveal poison" from the second
+        // put the two buckets tgt and get the array
         int index = 0;
         foreach (var hole in holes)
         {
@@ -68,10 +68,10 @@ public class BottleReveal : MonoBehaviour
     // Binary Search (search for "reveal fruit" or "reveal poison")
     private int BinarySearch(string[] array, string target)
     {
-        int low = 0, high = array.Length - 1;
-        while (low <= high)
+        int left = 0, right = array.Length - 1;
+        while (left <= right)
         {
-            int mid = (low + high) / 2;
+            int mid = (left + right) / 2;
             int comparison = string.Compare(array[mid], target);  // Compare strings directly
             if (comparison == 0)
             {
@@ -79,11 +79,11 @@ public class BottleReveal : MonoBehaviour
             }
             if (comparison < 0)
             {
-                low = mid + 1;
+                left = mid + 1;
             }
             else
             {
-                high = mid - 1;
+                right = mid - 1;
             }
         }
         return -1; // If not found, return -1

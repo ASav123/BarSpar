@@ -21,12 +21,12 @@ public class BottleManager : MonoBehaviour
     private Coins _coins;
 
 
-    private BottleReveal bottleReveal; // Reference to the BottleReveal script
+   
 
     void Start()
     {
         Debug.Log("Start method called");
-        bottleReveal = GetComponent<BottleReveal>(); // Get the BottleReveal component
+        
         SpawnBottles(); // This will call SpawnBottles when the game starts
         _scenes = GetComponent<Scenes>();
         _coins = GetComponent<Coins>();
@@ -108,7 +108,6 @@ public class BottleManager : MonoBehaviour
             ((Beer)bottle).SetBeerIsConsumed(true);
             spriteRenderer.sprite = beerPrefab.GetComponent<SpriteRenderer>().sprite;
             Debug.Log("Beer has been consumed.");
-            bottleReveal.RevealRandomBottle();
         }
         else if (bottle is Elixir && !((Elixir)bottle).GetElixirIsConsumed())
         {
