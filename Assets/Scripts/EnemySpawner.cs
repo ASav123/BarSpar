@@ -19,9 +19,11 @@ public class Spawner : MonoBehaviour
     private int _randomSide;
     public Transform Player;
     private int _delay = 3;
+    private int monsterCount;
 
     void Awake()
     {
+        monsterCount= 0;
         // Starts spawing
         StartCoroutine(SpawnMonsters());
 
@@ -29,8 +31,9 @@ public class Spawner : MonoBehaviour
     // Picks a random spawn location and spawns a ghost
     IEnumerator SpawnMonsters()
     {
-        while (true)
+        while (monsterCount < 50)
         {
+            monsterCount += 1;
             yield return new WaitForSeconds(this._delay);
 
             this._randomSide = Random.Range(0, 3);
