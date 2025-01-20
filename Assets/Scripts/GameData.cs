@@ -46,6 +46,7 @@ public class GameData : MonoBehaviour
         this.EnemyDamage = ememyDamage;
     }
 
+    // Resents data to defaults data values
     public void ResetData() {
         this.PlayerCoins = 0;
         this.PlayerHealth = this.PlayerMaxHealth;

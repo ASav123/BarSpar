@@ -9,25 +9,22 @@ public class Player : Character
     private Character _character;
     private Scenes _scenes;
     private Coins _coins;
+    private CoinsUpdate _coinsUpdate;
     private Pocket _pocket;
-    private DifficultySelection _difficultySelection;
-
     private int _moveSpeed;
     
-
-
     void Start()
     {
         // Getts each of the sripts
         _character = GetComponent<Character>();
         _scenes = GetComponent<Scenes>();
         _coins = GetComponent<Coins>();
-        _difficultySelection = GetComponent<DifficultySelection>();
+        _coinsUpdate = GetComponent<CoinsUpdate>();
         _pocket = GetComponent<Pocket>();
 
 
         // Player created
-        PlayerCreate(GameData.Instance.PlayerName , GameData.Instance.PlayerHealth, GameData.Instance.PlayerMaxHealth ,3 , GameData.Instance.PlayerSpeed, GameData.Instance.PlayerCoins);
+        this.PlayerCreate(GameData.Instance.PlayerName , GameData.Instance.PlayerHealth, GameData.Instance.PlayerMaxHealth ,3 , GameData.Instance.PlayerSpeed, GameData.Instance.PlayerCoins);
 
     }
 
@@ -41,61 +38,75 @@ public class Player : Character
         Vector2 moveDirection = new Vector2(moveX, moveY).normalized;
         transform.Translate(moveDirection * this._moveSpeed * Time.deltaTime);
 
+
     }
 
     // Player constructor using base class of character
     public void PlayerCreate(string name, int health, int maxHealth, int damage, int moveSpeed, int coins)
     {
-        _character.CharacterCreate(name, health, maxHealth, damage);
+        // Uses base class constructer 
+        base.CharacterCreate(name, health, maxHealth, damage);
         this._moveSpeed = moveSpeed;
 
         // Coins created though composition (strong)
-        _coins.CoinsCreate(coins);
+        this._coinsUpdate.CoinsCreate(coins);
     }
 
   
 
     // Collison detection with outside area
+
+    // Bar
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bar"))
         {
-            this._scenes.PlayGame();
+            // Calls method that searches players pockets for key
+            if (_pocket.GetKeuStatus() == true) {
+
+                this._scenes.PlayGame();
+
+            }
         }
 
+        // Ghost
         if (collision.gameObject.CompareTag("Ghost"))
         {
             this.ChangeHealth(-GameData.Instance.EnemyDamage);
-            GameData.Instance.PlayerHealth = this.GetHealth();
+            GameData.Instance.PlayerHealth = this._character.GetHealth();
 
 
         }
 
+        // Heart
         if (collision.gameObject.CompareTag("Heart"))
         {
             this.ChangeHealth(5);
-            GameData.Instance.PlayerHealth = this.GetHealth();
-            this._pocket.PocketAdd("Heart");
+            GameData.Instance.PlayerHealth = this._character.GetHealth();
+            this._pocket.PocketAdd("heart");
 
 
         }
 
+        // Coin
         if (collision.gameObject.CompareTag("Coin"))
         {
-            this._coins.ChangeCoins(5);
-            GameData.Instance.PlayerCoins = this._coins.GetCoins();
-            this._pocket.PocketAdd("Coin");
+            this._coinsUpdate.ChangeCoins(5);
+            GameData.Instance.PlayerCoins = this._coinsUpdate.GetCoins();
+            this._pocket.PocketAdd("coin");
 
         }
 
+        // Flower
         if (collision.gameObject.CompareTag("Flower"))
         {
-            this._pocket.PocketAdd("Flower");
+            this._pocket.PocketAdd("flower");
         }
 
+        // Key
         if (collision.gameObject.CompareTag("Key"))
         {
-            this._pocket.PocketAdd("Key");
+            this._pocket.PocketAdd("key");
         }
     }
 }
