@@ -10,17 +10,25 @@ public class Zombie : Character
     private Transform _player;
     private float _speed = 2f;
 
+
     void Awake()
     {
-        // Gets each of the scripts 
+        // Using Contructor, it creates Zombie.
+        GhostCreate("Ghost", 1, 1, 1);
+
+
+        // Attains the rigid body script
         this._myBody = GetComponent<Rigidbody2D>();
 
-        // Gets players position
+        // Gets players position to target
         this._player = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
+
+
     void Update()
     {
-        //Ghost movement
+        //Zombies Movements
         if (this._player != null)
         {
             Vector2 direction = (this._player.position - transform.position).normalized;
@@ -33,8 +41,15 @@ public class Zombie : Character
         }
     }
 
+    public void GhostCreate(string name, int health, int maxHealth, int damage)
+    {
+        // Creates Zombie object with base class
+        base.CharacterCreate(name, health, maxHealth, damage);
 
-    // Destroys Ghost when collides with player
+    }
+
+
+    // When Zombie makes contact with player it gets destroyed
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
