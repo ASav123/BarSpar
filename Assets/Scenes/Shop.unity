@@ -934,7 +934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: abd01c997327f18409538f0bbf93fa12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ede69db4a3708ca45a788d4f6235e0f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a63c4e193856f4aa325238902fb112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wallet: 5000
+  Wallet: 0
 --- !u!1 &1459067312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,6 +1316,9 @@ GameObject:
   - component: {fileID: 1459067313}
   - component: {fileID: 1459067317}
   - component: {fileID: 1459067318}
+  - component: {fileID: 1459067321}
+  - component: {fileID: 1459067320}
+  - component: {fileID: 1459067319}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Bar
@@ -1440,7 +1443,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a63c4e193856f4aa325238902fb112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wallet: 5000
+  Wallet: 0
+--- !u!114 &1459067319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459067312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf489d906d724a4f8ebbf0120de87e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1459067320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459067312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db989d4229b6241409cbd00e1b3302e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spotlightSword: {fileID: 482778193}
+  spotlightGun: {fileID: 29493218}
+  spotlightHealthPotion: {fileID: 876292320}
+  spotlightLargeHealthPotion: {fileID: 1496314920}
+--- !u!114 &1459067321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459067312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921be16f7c97fa44c94a539ad20be957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1478784930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1629,7 @@ GameObject:
   - component: {fileID: 1496314922}
   - component: {fileID: 1496314921}
   m_Layer: 0
-  m_Name: Spotlight Sword Large Health Potion
+  m_Name: Spotlight Large Health Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1774,7 +1817,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7b533f7f27d99aa4aaa81c0fb7b6a439, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 70824b11766814848bdf52a4c8b16d4d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2041,7 +2084,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7b533f7f27d99aa4aaa81c0fb7b6a439, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 70824b11766814848bdf52a4c8b16d4d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

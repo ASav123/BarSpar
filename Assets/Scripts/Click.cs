@@ -4,7 +4,7 @@ using TMPro; // Required for TextMeshPro
 public class Click : MonoBehaviour
 {
     private Coins _coins;
-    private int _wallet;
+    private Character _character;
     private bool _hasSword = false;
     private bool _hasGun = false;
 
@@ -23,28 +23,26 @@ public class Click : MonoBehaviour
         _coins = FindObjectOfType<Coins>();
         if (_coins != null)
         {
-            _wallet = _coins.GetCoins();
             UpdateCoinCounter();
-            Debug.Log("Initial wallet value: " + _wallet);
-        }
-        else
-        {
-            Debug.LogError("Coins component not found in the scene!");
+            Debug.Log("Initial wallet value: " + _coins.GetCoins());
         }
 
-        // Check if the coinCounterText is assigned
-        if (coinCounterText == null)
-        {
-            Debug.LogError("Coin counter text is not assigned in the Inspector!");
-        }
+        _character = FindObjectOfType<Character>();
+    }
+
+    void Update()
+    {
+        // Get Current Wallet Balance
+        Debug.Log("Current Wallet Balance: " + _coins.GetCoins());
+        UpdateCoinCounter();
     }
 
     public void SwordButtonClicked()
     {
-        if (_wallet >= 10)
+        if (_coins.GetCoins() >= 10)
         {
-            _wallet -= 10;
-            Debug.Log("Sword purchased! Remaining wallet: " + _wallet);
+            _coins.ChangeCoins(-10); // Deduct 10 coins from the wallet
+            Debug.Log("Sword purchased! Remaining wallet: " + _coins.GetCoins());
             swordButton.SetActive(false);
             UpdateCoinCounter();
             _hasSword = true;
@@ -57,10 +55,10 @@ public class Click : MonoBehaviour
 
     public void GunButtonClicked()
     {
-        if (_wallet >= 20)
+        if (_coins.GetCoins() >= 20)
         {
-            _wallet -= 20;
-            Debug.Log("Gun purchased! Remaining wallet: " + _wallet);
+            _coins.ChangeCoins(-20); // Deduct 20 coins from the wallet
+            Debug.Log("Gun purchased! Remaining wallet: " + _coins.GetCoins());
             gunButton.SetActive(false);
             UpdateCoinCounter();
             _hasGun = true;
@@ -73,10 +71,18 @@ public class Click : MonoBehaviour
 
     public void HealthPotionButtonClicked()
     {
-        if (_wallet >= 5)
+        if (_coins.GetCoins() >= 5)
         {
-            _wallet -= 5;
-            Debug.Log("Health potion purchased! Remaining wallet: " + _wallet);
+            _coins.ChangeCoins(-5); // Deduct 5 coins from the wallet
+            Debug.Log("Health potion purchased! Remaining wallet: " + _coins.GetCoins());
+            if (_character != null)
+            {
+                _character.ChangeHealth(20);
+            }
+            else
+            {
+                Debug.LogError("Character component is not assigned!");
+            }
             UpdateCoinCounter();
         }
         else
@@ -87,10 +93,18 @@ public class Click : MonoBehaviour
 
     public void LargeHealthPotionButtonClicked()
     {
-        if (_wallet >= 10)
+        if (_coins.GetCoins() >= 10)
         {
-            _wallet -= 10;
-            Debug.Log("Large health potion purchased! Remaining wallet: " + _wallet);
+            _coins.ChangeCoins(-10); // Deduct 10 coins from the wallet
+            Debug.Log("Large health potion purchased! Remaining wallet: " + _coins.GetCoins());
+            if (_character != null)
+            {
+                _character.ChangeHealth(50);
+            }
+            else
+            {
+                Debug.LogError("Character component is not assigned!");
+            }
             UpdateCoinCounter();
         }
         else
@@ -104,7 +118,7 @@ public class Click : MonoBehaviour
     {
         if (coinCounterText != null)
         {
-            coinCounterText.text = "Coins: " + _wallet;
+            coinCounterText.text = "Coins: " + _coins.GetCoins();
         }
         else
         {
@@ -121,5 +135,4 @@ public class Click : MonoBehaviour
     {
         return _hasGun;
     }
-
 }
