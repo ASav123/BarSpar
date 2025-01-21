@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    //Common attributes for all game characters
+    //Common attributes for all game characters like player and enemies
     private string _name;
     private int _maxHealth;
     private int _health;

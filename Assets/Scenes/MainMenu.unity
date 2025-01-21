@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a63c4e193856f4aa325238902fb112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wallet: 5000
+  wallet: 15
 --- !u!114 &540411542
 MonoBehaviour:
   m_ObjectHideFlags: 0
