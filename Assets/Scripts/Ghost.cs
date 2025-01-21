@@ -10,14 +10,22 @@ public class Ghost : Character
     private Transform _player;
     private float _speed = 2f;
 
+
     void Awake()
     {
+        // Creates Ghost obejt using constructor
+        GhostCreate("Ghost", 1, 1, 1);
+
+
         // Gets each of the scripts 
         this._myBody = GetComponent<Rigidbody2D>();
 
         // Gets players position
         this._player = GameObject.FindGameObjectWithTag("Player").transform;
+
     }
+
+
     void Update()
     {
         //Ghost movement
@@ -31,6 +39,13 @@ public class Ghost : Character
         {
             this._myBody.velocity = Vector2.zero;
         }
+    }
+
+    public void GhostCreate(string name, int health, int maxHealth, int damage)
+    {
+        // Uses base class constructer to create ghsot object
+        base.CharacterCreate(name, health, maxHealth, damage);
+
     }
 
 

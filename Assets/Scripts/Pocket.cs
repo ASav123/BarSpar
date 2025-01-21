@@ -7,6 +7,8 @@ public class Pocket : MonoBehaviour
 {
     // Arrays for players pockets
     private string[] _playerPocket;
+
+    // Defines the order sorting algorithms will sort
     private string[] _sortingOrder;
 
     private void Start()
@@ -26,6 +28,7 @@ public class Pocket : MonoBehaviour
         }
 
         // Creates an array with an extra slot and adds item
+        // Uses for loop to add item index by index then addes new item
         else
         {
             string[] newPlayerPocket = new string[this._playerPocket.Length + 1];
@@ -37,15 +40,18 @@ public class Pocket : MonoBehaviour
             this._playerPocket = newPlayerPocket;
         }
 
+        // Sorts after an item is added
         InstanceSort();
 
     }
 
     // MODIFIED EXCHANGE SORT
     // Using the sorting order sorts players pockets into that order
+    // [coin, key, coin, flower, coin] -> [coin, coin, coin, flower, key]
     public void Sort(string[] sortingOrder)
     {
-        // Exchange sort for one item at a time
+        // Exchange sort for one item at a time from soring order
+        // (Brings one item to the front at a time)
         foreach (string item in sortingOrder)
         {
             for (int cursor = 0; cursor < this._playerPocket.Length; cursor++)
@@ -64,7 +70,8 @@ public class Pocket : MonoBehaviour
         }
     }
 
-    // Sorts players pockets by amount of each item and groups items together from highest to lowest based on their amount
+    // SORTS BY AMOUNT OF ITEMS AND TYPE OF ITEM
+    // Most amount of one type of an item will be at the front then most amount of second...
     public void InstanceSort()
     {
         int coinCount = 0;
@@ -123,6 +130,8 @@ public class Pocket : MonoBehaviour
         while (left <= right)
         {
             int mid = (left + right) / 2;
+
+            // Compares the two strings byte by byte to see and they are the same and returns 0 if they are
             int comparison = string.Compare(this._playerPocket[mid], target, System.StringComparison.Ordinal);
 
             // If value = 0 then target is found

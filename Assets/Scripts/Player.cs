@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class Player : Character
 {
+
     // Unique attributes of player class
+    // All private so outside classes cannot acess these
+
     private Character _character;
     private Scenes _scenes;
     private Coins _coins;
@@ -44,7 +47,7 @@ public class Player : Character
     // Player constructor using base class of character
     public void PlayerCreate(string name, int health, int maxHealth, int damage, int moveSpeed, int coins)
     {
-        // Uses base class constructer 
+        // Uses base class constructer to create player object
         base.CharacterCreate(name, health, maxHealth, damage);
         this._moveSpeed = moveSpeed;
 
@@ -61,7 +64,7 @@ public class Player : Character
     {
         if (collision.gameObject.CompareTag("Bar"))
         {
-            // Calls method that searches players pockets for key
+            // Calls method from pocket script that searches the players pockets for key
             if (_pocket.GetKeuStatus() == true) {
 
                 this._scenes.PlayGame();
