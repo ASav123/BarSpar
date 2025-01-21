@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
-    [SerializeField] private int wallet; // Serialized field for Inspector visibility
+    [SerializeField] private int wallet = 20; // Serialized field for Inspector visibility
+
+    private static Coins instance; // Singleton instance
 
     // Property to access and modify Wallet
     public int Wallet
@@ -11,8 +13,7 @@ public class Coins : MonoBehaviour
         set
         {
             wallet = value;
-            // Sync changes to the Inspector
-            SyncInspector();
+            SyncInspector(); // Sync changes to the Inspector
         }
     }
 

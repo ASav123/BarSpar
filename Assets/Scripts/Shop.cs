@@ -13,7 +13,6 @@ public class Shop : MonoBehaviour
     private int _difficulty;
     private int _maxHealth;
     private int _diffrenceHealth;
-    private int _largestRank;
 
     private int _Sword;
     private int _Gun;

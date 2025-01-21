@@ -11,8 +11,6 @@ public class DifficultySelection : MonoBehaviour
     private int _enemyDamage;
     private int _difficulty;
 
-    private Coins _coins;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +21,6 @@ public class DifficultySelection : MonoBehaviour
         this._difficulty = 1;
         GameData.Instance.DifficultySettings(this._playerHealth, this._playerSpeed, this._enemyDamage);
 
-        _coins = GetComponent<Coins>();
-        _coins.CoinsCreate(10);
-        Debug.Log("Created Coins");
     }
 
     // Hard settings
@@ -36,7 +31,6 @@ public class DifficultySelection : MonoBehaviour
         this._difficulty = 0;
         GameData.Instance.DifficultySettings(this._playerHealth, this._playerSpeed, this._enemyDamage);
 
-        _coins.CoinsCreate(5);
     }
 
     // Normal settings
@@ -47,7 +41,6 @@ public class DifficultySelection : MonoBehaviour
         this._difficulty = 1;
         GameData.Instance.DifficultySettings(this._playerHealth, this._playerSpeed, this._enemyDamage);
 
-        _coins.CoinsCreate(10);
     }
 
     // Getters
