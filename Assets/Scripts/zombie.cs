@@ -13,8 +13,8 @@ public class Zombie : Character
 
     void Awake()
     {
-        // Using Contructor, it creates Zombie.
-        GhostCreate("Ghost", 1, 1, 1);
+        // Using previous Contructor, it creates Zombie.
+        GhostCreate("Zombie", 1, 1, 1);
 
 
         // Attains the rigid body script
