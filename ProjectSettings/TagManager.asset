@@ -17,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - PauseMenu
+  - Extra
   - 
   - 
   - 
@@ -58,4 +58,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1639658887
+    locked: 0
+  - name: PauseMenu
+    uniqueID: 215942037
     locked: 0

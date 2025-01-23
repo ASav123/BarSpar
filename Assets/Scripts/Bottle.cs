@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -181,3 +183,4 @@ class Poison : Safe
         this.IsConsumed = isConsumed;
     }
 }
+
