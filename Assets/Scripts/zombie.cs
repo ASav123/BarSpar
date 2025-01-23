@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ghost : Character
+public class Zombie : Character
 {
     //Speed varibles
     [HideInInspector]
@@ -13,14 +13,14 @@ public class Ghost : Character
 
     void Awake()
     {
-        // Creates Ghost obejt using constructor
-        GhostCreate("Ghost", 1, 1, 1);
+        // Using previous Contructor, it creates Zombie.
+        GhostCreate("Zombie", 1, 1, 1);
 
 
-        // Gets each of the scripts 
+        // Attains the rigid body script
         this._myBody = GetComponent<Rigidbody2D>();
 
-        // Gets players position
+        // Gets players position to target
         this._player = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
@@ -28,7 +28,7 @@ public class Ghost : Character
 
     void Update()
     {
-        //Ghost movement
+        //Zombies Movements
         if (this._player != null)
         {
             Vector2 direction = (this._player.position - transform.position).normalized;
@@ -43,13 +43,13 @@ public class Ghost : Character
 
     public void GhostCreate(string name, int health, int maxHealth, int damage)
     {
-        // Uses base class constructer to create ghsot object
+        // Creates Zombie object with base class
         base.CharacterCreate(name, health, maxHealth, damage);
 
     }
 
 
-    // Destroys Ghost when collides with player
+    // When Zombie makes contact with player it gets destroyed
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour
 {
-    // Creates a static referance of file
+    // Creates a static referance of file so other scripts can access it
     public static GameData Instance;
 
-    // Game data saved
+    // Game data saved vlaues
     public string PlayerName;
     public int PlayerCoins;
     public int PlayerHealth;
@@ -46,6 +46,7 @@ public class GameData : MonoBehaviour
         this.EnemyDamage = ememyDamage;
     }
 
+    // Resents data to defaults data values
     public void ResetData() {
         this.PlayerCoins = 0;
         this.PlayerHealth = this.PlayerMaxHealth;

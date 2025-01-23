@@ -5,20 +5,30 @@ using UnityEngine;
 
 public class Pocket : MonoBehaviour
 {
+    // Arrays for players pockets
     private string[] _playerPocket;
-    private int _playerPocketPointer;
 
-    private int _countCoins;
-    private int _countHearts;
-    private int _countKeys;
-    private int _countFlower;
+    // Defines the order sorting algorithms will sort
+    private string[] _sortingOrder;
 
+    private void Start()
+    {
+        // Creates soring order and sets key to false
+        this._sortingOrder = new string[] { "coin", "flower", "heart", "key" };
+
+    }
+
+    // Adds an item pocked up to players pockets
     public void PocketAdd(string item)
     {
+        // Creates a new array if one does not yet exist
         if (this._playerPocket == null)
         {
             this._playerPocket = new string[] { item };
         }
+
+        // Creates an array with an extra slot and adds item
+        // Uses for loop to add item index by index then addes new item
         else
         {
             string[] newPlayerPocket = new string[this._playerPocket.Length + 1];
@@ -29,26 +39,30 @@ public class Pocket : MonoBehaviour
             newPlayerPocket[newPlayerPocket.Length - 1] = item;
             this._playerPocket = newPlayerPocket;
         }
-        foreach (string playerPocket in this._playerPocket)
-        {
-            Debug.Log(playerPocket);
-        }
-        Debug.Log("");
+
+        // Sorts after an item is added
+        InstanceSort();
+
     }
 
-    public void Sort(string[] arr, string[] sortingOrder)
+    // MODIFIED EXCHANGE SORT
+    // Using the sorting order sorts players pockets into that order
+    // [coin, key, coin, flower, coin] -> [coin, coin, coin, flower, key]
+    public void Sort(string[] sortingOrder)
     {
+        // Exchange sort for one item at a time from soring order
+        // (Brings one item to the front at a time)
         foreach (string item in sortingOrder)
         {
-            for (int cursor = 0; cursor < arr.Length; cursor++)
+            for (int cursor = 0; cursor < this._playerPocket.Length; cursor++)
             {
-                for (int i = 0; i < arr.Length; i++)
+                for (int i = 0; i < this._playerPocket.Length; i++)
                 {
-                    if (arr[cursor] != item && arr[i] == item)
+                    if (this._playerPocket[cursor] != item && this._playerPocket[i] == item)
                     {
-                        string tempItem = arr[i];
-                        arr[i] = arr[cursor];
-                        arr[cursor] = tempItem;
+                        string tempItem = this._playerPocket[i];
+                        this._playerPocket[i] = this._playerPocket[cursor];
+                        this._playerPocket[cursor] = tempItem;
                     }
 
                 }
@@ -56,24 +70,27 @@ public class Pocket : MonoBehaviour
         }
     }
 
-    public void InstanceSort(string[] arr)
+    // SORTS BY AMOUNT OF ITEMS AND TYPE OF ITEM
+    // Most amount of one type of an item will be at the front then most amount of second...
+    public void InstanceSort()
     {
         int coinCount = 0;
         int heartCount = 0;
         int flowerCount = 0;
         int keyCount = 0;
 
-        for (int i = 0; i < arr.Length; i++)
+        // Counts each item
+        for (int i = 0; i < this._playerPocket.Length; i++)
         {
-            if (arr[i] == "coin")
+            if (this._playerPocket[i] == "coin")
             {
                 coinCount++;
             }
-            else if (arr[i] == "heart")
+            else if (this._playerPocket[i] == "heart")
             {
                 heartCount++;
             }
-            else if (arr[i] == "flower")
+            else if (this._playerPocket[i] == "flower")
             {
                 flowerCount++;
             }
@@ -82,41 +99,52 @@ public class Pocket : MonoBehaviour
                 keyCount++;
             }
         }
-        string[] tempArr = new string[4];
+        // Created the highest to lowest item order
+        string[] tempOrder = new string[4];
         if (coinCount > heartCount)
         {
-            tempArr[0] = "coin";
-            tempArr[1] = "heart";
+            tempOrder[0] = "coin";
+            tempOrder[1] = "heart";
         }
         else
         {
-            tempArr[0] = "heart";
-            tempArr[1] = "coin";
+            tempOrder[0] = "heart";
+            tempOrder[1] = "coin";
         }
-        tempArr[2] = "flower";
-        tempArr[3] = "key";
+        tempOrder[2] = "flower";
+        tempOrder[3] = "key";
 
-        Sort(arr, tempArr);
+        // Sends to exhcange sort algorithm
+        Sort(tempOrder);
     }
 
-    public int BinarySearch(string[] arr, string target)
+
+    //BINARY SEARCH
+    // Binary search on a sorted players pockets array and returns index
+    public int BinarySearch(string target)
     {
         int left = 0;
-        int right = arr.Length - 1;
+        int right = this._playerPocket.Length - 1;
 
+        // Compares values of strings until the target string is found 
         while (left <= right)
         {
             int mid = (left + right) / 2;
-            int comparison = string.Compare(arr[mid], target, System.StringComparison.Ordinal);
 
+            // Compares the two strings byte by byte to see and they are the same and returns 0 if they are
+            int comparison = string.Compare(this._playerPocket[mid], target, System.StringComparison.Ordinal);
+
+            // If value = 0 then target is found
             if (comparison == 0)
             {
                 return mid;
             }
+            // If value < 0 then target is to the right of mid
             else if (comparison < 0)
             {
                 left = mid + 1;
             }
+            // Else target is to the left of mid
             else
             {
                 right = mid - 1;
@@ -126,11 +154,13 @@ public class Pocket : MonoBehaviour
         return -1;
     }
 
-    public static int LinearSearch(string[] arr, string item)
+    // LINEAR SEARCH
+    // Linear search on sorted players pockets and returns index
+    public int LinearSearch(string item)
     {
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < this._playerPocket.Length; i++)
         {
-            if (arr[i] == item)
+            if (this._playerPocket[i] == item)
             {
                 return i;
             }
@@ -138,22 +168,44 @@ public class Pocket : MonoBehaviour
         return -1;
     }
 
-    public static string[] RemoveItem(string[] arr, string item)
+    // Removes an item from players pockets
+    public void RemoveItem(string item)
     {
-        int itemIndex = LinearSearch(arr, item);
-        string[] newPockets = new string[arr.Length - 1];
-        for (int i = 0; i < arr.Length - 1; i++)
-        {
-            if (i < itemIndex)
+        // Uses the binary search to find the items index
+        int itemIndex = BinarySearch(item);
+
+        // If item is found a one smaller array is made and copies all strings exept taarget index value
+        if (itemIndex != -1) {
+            string[] newPockets = new string[this._playerPocket.Length - 1];
+            for (int i = 0; i < this._playerPocket.Length - 1; i++)
             {
-                newPockets[i] = arr[i];
+                if (i < itemIndex)
+                {
+                    newPockets[i] = this._playerPocket[i];
+                }
+                else if (i > itemIndex)
+                {
+                    newPockets[i - 1] = this._playerPocket[i];
+                }
             }
-            else if (i > itemIndex)
-            {
-                newPockets[i - 1] = arr[i];
-            }
+            this._playerPocket = newPockets;
+
+
         }
-        return newPockets;
+
+    }
+
+    // Seaches for "key" in players pockets using binary search
+    public bool GetKeuStatus() {
+        int reuslt = BinarySearch("key");
+        if (reuslt != -1)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
     }
 
 }
